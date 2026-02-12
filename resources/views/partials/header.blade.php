@@ -37,6 +37,20 @@
                               <li class="nav-item">
                                  <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{route('contact')}}">Contact Us</a>
                               </li>
+                              @guest
+                              <li class="nav-item">
+                                 <a class="nav-link" href="{{route('login')}}">Login</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="{{route('register')}}">Register</a>
+                              </li>
+                              @endguest
+
+                              @auth
+                              <li class="nav-item">
+                                 <a class="nav-link" href="{{route('dashboard')}}">{{auth()->user()->name}}</a>
+                              </li>
+                              @endauth
                            </ul>
                         </div>
                      </nav>

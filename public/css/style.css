@@ -262,10 +262,10 @@ button {
 }
 
 .navigation.navbar-dark .navbar-nav .nav-link {
-     padding: 7px 0px 27px 0px;
+     padding: 7px 0px 7px 0px;
      margin: 0 22px;
      color: #010101;
-     font-size: 16px;
+     font-size: 12px;
      line-height: 20px;
      font-weight: 500;
      text-transform: uppercase;
