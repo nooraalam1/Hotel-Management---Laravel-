@@ -5,10 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 
 Route::middleware(['auth','role:admin'])->group(function(){
     Route::get('/admin/dashboard',[AdminController::class,'index'])->name('adminDashboard');
@@ -17,6 +13,13 @@ Route::middleware(['auth','role:admin'])->group(function(){
 Route::middleware(['auth','role:user'])->group(function(){
     Route::get('/dashboard',[UserController::class,'index'])->name('dashboard');
 });
+
+Route::get('/',[UserController::class,'home'])->name('home');
+Route::get('/about',[UserController::class,'about'])->name('about');
+Route::get('/room',[UserController::class,'room'])->name('room');
+Route::get('/gallery',[UserController::class,'gallery'])->name('gallery');
+Route::get('/blog',[UserController::class,'blog'])->name('blog');
+Route::get('/contact',[UserController::class,'contact'])->name('contact');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
