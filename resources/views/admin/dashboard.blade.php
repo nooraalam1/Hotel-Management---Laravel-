@@ -1,92 +1,73 @@
 @extends('admin.partials.app')
 
 @section('content')
-  <div class="d-flex align-items-stretch">
-    <!-- Sidebar Navigation-->
-    <nav id="sidebar">
-      <!-- Sidebar Header-->
-      <div class="sidebar-header d-flex align-items-center">
-        <div class="avatar"><img src="{{asset('admin/img/avatar-6.jpg')}}" alt="..." class="img-fluid rounded-circle">
-        </div>
-        <div class="title">
-          <h1 class="h5">Mark Stephen</h1>
-          <p>Web Designer</p>
-        </div>
+  <div class="page-content">
+    <div class="page-header">
+      <div class="container-fluid">
+        <h2 class="h5 no-margin-bottom">Dashboard</h2>
       </div>
-      <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
-      <ul class="list-unstyled">
-        <li class="active"><a href="{{route('admin.dashboard')}}"> <i class="icon-home"></i>Home </a></li>
-        <li><a href="{{route('home')}}"> <i class="icon-logout"></i>Go to Website </a></li>
-    </nav>
-    <!-- Sidebar Navigation end-->
-    <div class="page-content">
-      <div class="page-header">
-        <div class="container-fluid">
-          <h2 class="h5 no-margin-bottom">Dashboard</h2>
-        </div>
-      </div>
-      <section class="no-padding-top no-padding-bottom">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-3 col-sm-6">
-              <div class="statistic-block block">
-                <div class="progress-details d-flex align-items-end justify-content-between">
-                  <div class="title">
-                    <div class="icon"><i class="icon-user-1"></i></div><strong>Total Clients</strong>
-                  </div>
-                  <div class="number dashtext-1">{{auth()->user()->count()}}</div>
+    </div>
+    <section class="no-padding-top no-padding-bottom">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3 col-sm-6">
+            <div class="statistic-block block">
+              <div class="progress-details d-flex align-items-end justify-content-between">
+                <div class="title">
+                  <div class="icon"><i class="icon-user-1"></i></div><strong>Total Clients</strong>
                 </div>
-                <div class="progress progress-template">
-                  <div role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"
-                    class="progress-bar progress-bar-template dashbg-1"></div>
-                </div>
+                <div class="number dashtext-1">{{auth()->user()->count()}}</div>
+              </div>
+              <div class="progress progress-template">
+                <div role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"
+                  class="progress-bar progress-bar-template dashbg-1"></div>
               </div>
             </div>
-            <div class="col-md-3 col-sm-6">
-              <div class="statistic-block block">
-                <div class="progress-details d-flex align-items-end justify-content-between">
-                  <div class="title">
-                    <div class="icon"><i class="icon-contract"></i></div><strong>New Projects</strong>
-                  </div>
-                  <div class="number dashtext-2"> </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="statistic-block block">
+              <div class="progress-details d-flex align-items-end justify-content-between">
+                <div class="title">
+                  <div class="icon"><i class="icon-contract"></i></div><strong>New Projects</strong>
                 </div>
-                <div class="progress progress-template">
-                  <div role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
-                    class="progress-bar progress-bar-template dashbg-2"></div>
-                </div>
+                <div class="number dashtext-2"></div>
+              </div>
+              <div class="progress progress-template">
+                <div role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+                  class="progress-bar progress-bar-template dashbg-2"></div>
               </div>
             </div>
-            <div class="col-md-3 col-sm-6">
-              <div class="statistic-block block">
-                <div class="progress-details d-flex align-items-end justify-content-between">
-                  <div class="title">
-                    <div class="icon"><i class="icon-paper-and-pencil"></i></div><strong>New Invoices</strong>
-                  </div>
-                  <div class="number dashtext-3"></div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="statistic-block block">
+              <div class="progress-details d-flex align-items-end justify-content-between">
+                <div class="title">
+                  <div class="icon"><i class="icon-paper-and-pencil"></i></div><strong>New Invoices</strong>
                 </div>
-                <div class="progress progress-template">
-                  <div role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"
-                    class="progress-bar progress-bar-template dashbg-3"></div>
-                </div>
+                <div class="number dashtext-3"></div>
+              </div>
+              <div class="progress progress-template">
+                <div role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"
+                  class="progress-bar progress-bar-template dashbg-3"></div>
               </div>
             </div>
-            <div class="col-md-3 col-sm-6">
-              <div class="statistic-block block">
-                <div class="progress-details d-flex align-items-end justify-content-between">
-                  <div class="title">
-                    <div class="icon"><i class="icon-writing-whiteboard"></i></div><strong>All Projects</strong>
-                  </div>
-                  <div class="number dashtext-4"></div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="statistic-block block">
+              <div class="progress-details d-flex align-items-end justify-content-between">
+                <div class="title">
+                  <div class="icon"><i class="icon-writing-whiteboard"></i></div><strong>All Projects</strong>
                 </div>
-                <div class="progress progress-template">
-                  <div role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"
-                    class="progress-bar progress-bar-template dashbg-4"></div>
-                </div>
+                <div class="number dashtext-4"></div>
+              </div>
+              <div class="progress progress-template">
+                <div role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"
+                  class="progress-bar progress-bar-template dashbg-4"></div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   </div>
 @endsection
