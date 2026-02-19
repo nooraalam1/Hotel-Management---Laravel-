@@ -36,7 +36,9 @@
 
       @include('partials.header')
 
-      @yield('content')
+      <div >
+         @yield('content')
+      </div>
 
       @include('partials.footer')
 

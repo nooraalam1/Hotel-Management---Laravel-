@@ -27,7 +27,6 @@ Route::middleware(['auth', 'role:admin,user'])->group(function () {
     Route::get('/contact', [UserController::class, 'contact'])->name('contact');
 });
 
-
 Route::middleware('auth')
     ->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
