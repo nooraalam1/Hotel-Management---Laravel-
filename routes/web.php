@@ -11,6 +11,7 @@ Route::middleware(['auth', 'role:admin'])
     ->group(function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
         Route::get('/addRoom', [AdminController::class, 'addRoom'])->name('admin.addRoom');
+        Route::post('/add_room',[AdminController::class,'add_room'])->name('admin.add_room');
     });
 
 Route::middleware(['auth', 'role:user'])

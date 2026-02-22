@@ -14,11 +14,11 @@
                <h3>Menu Link</h3>
                <ul class="link_menu">
                   <li class="active"><a href="#">Home</a></li>
-                  <li><a href="">About</a></li>
-                  <li><a href="">Our Room</a></li>
-                  <li><a href="">Gallery</a></li>
-                  <li><a href="">Blog</a></li>
-                  <li><a href="">Contact Us</a></li>
+                  <li><a href="{{route('about')}}">About</a></li>
+                  <li><a href="{{route('room')}}">Our Room</a></li>
+                  <li><a href="{{route('gallery')}}">Gallery</a></li>
+                  <li><a href="{{route('blog')}}">Blog</a></li>
+                  <li><a href="{{route('contact')}}">Contact Us</a></li>
                </ul>
             </div>
             <div class="col-md-4">
@@ -44,8 +44,7 @@
                   <p>
                   {{date('d-M-Y')}} All Rights Reserved.</a>
                   <br><br>
-
-               </p>
+                  </p>
 
             </div>
          </div>

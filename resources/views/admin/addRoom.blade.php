@@ -2,19 +2,15 @@
 @section('title','Add Room')
 @section('content')
 
-<form>
-
+<form action="{{route('admin.add_room')}}" method="post" enctype="multipart/form-data">
+	@csrf
 	<div>
 		<label>Room Title</label> </br>
-		<input type="text" name="title">
+		<input type="text" name="room_title">
 	</div>
 	<div>
 		<label>Description</label> </br>
 		<textarea name="description"></textarea>
-	</div>
-	<div>
-		<label>Room Title</label> </br>
-		<input type="text" name="title">
 	</div>
 	<div>
 		<label>Price</label> </br>

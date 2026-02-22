@@ -29,7 +29,9 @@
 
   <div class="d-flex align-items-stretch">
     @include('admin.partials.sidebar')
-    @yield('content')
+    <div style="min-height: 100vh;">
+      @yield('content')
+    </div>
     @include('admin.partials.footer')
   </div>
 
