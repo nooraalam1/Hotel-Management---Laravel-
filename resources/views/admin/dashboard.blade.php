@@ -1,5 +1,5 @@
 @extends('admin.partials.app')
-
+@section('title','Dashboard')
 @section('content')
 <div class="page-content">
   <div class="page-header">

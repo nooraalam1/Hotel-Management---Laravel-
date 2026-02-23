@@ -40,4 +40,9 @@ class AdminController extends Controller
         return redirect(route('admin.dashboard'));
     }
 
+    public function view_rooms(){
+        $rooms = Room::all();
+        return view('admin.view_rooms',compact('rooms'));
+    }
+
 }
