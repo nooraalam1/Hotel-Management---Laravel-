@@ -22,22 +22,22 @@
                 <div>
                     <label class="col-sm-3 form-control-label">Room Type</label>
                     <div class="col-sm-5">
-                    <select name="room_type" class="form-control mb-3">
-                        <option>Select</option>
-                        <option value="regular">Regular</option>
-                        <option value="premium">Premium</option>
-                        <option value="deluxe">Deluxe</option>
-                    </select>
+                        <select name="room_type" class="form-control mb-3">
+                            <option>Select</option>
+                            <option value="regular">Regular</option>
+                            <option value="premium">Premium</option>
+                            <option value="deluxe">Deluxe</option>
+                        </select>
                     </div>
                 </div>
                 <div>
                     <label class="col-sm-3 form-control-label">Wifi</label>
-                    <div class="col-sm-5" >
-                    <select name="wifi" class="form-control mb-3">
-                        <option>Select</option>
-                        <option value="yes">Yes</option>
-                        <option selected value="no">No</option>
-                    </select>
+                    <div class="col-sm-5">
+                        <select name="wifi" class="form-control mb-3">
+                            <option>Select</option>
+                            <option value="yes">Yes</option>
+                            <option selected value="no">No</option>
+                        </select>
                     </div>
                 </div>
                 <div>
@@ -46,7 +46,7 @@
                 </div>
                 <div>
                     <label>Upload Image</label> <br>
-                    <input type="file" name="image">
+                    <input type="file" name="image" required>
                 </div>
 
                 <div class="d-flex justify-content-center">
