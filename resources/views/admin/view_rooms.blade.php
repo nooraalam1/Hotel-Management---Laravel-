@@ -14,21 +14,21 @@
             <table class="table">
                 <tr>
                     <th>Room Title</th>
-                    <th>Image</th>
                     <th>Description</th>
                     <th>Price</th>
                     <th>Wifi</th>
                     <th>Room Type</th>
+                    <th>Image</th>
                     <th>Action</th>
                 </tr>
                 @forelse ($rooms as $room)
                     <tr class="table_row">
                         <td>{{ $room->room_title }}</td>
-                        <td></td>
                         <td>{{ $room->description }}</td>
                         <td>{{ $room->price }}</td>
                         <td>{{ $room->wifi }}</td>
                         <td>{{ $room->room_type }}</td>
+                        <td></td>
                         <td class="d-flex" style="gap: 10px">
                             <input class="btn btn-info" type="submit" value="Edit">
                             <div>
@@ -46,5 +46,4 @@
             </table>
         </section>
     </div>
-
 @endsection

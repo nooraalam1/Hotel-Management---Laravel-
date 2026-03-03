@@ -32,7 +32,6 @@ class AdminController extends Controller
         //     $imgPath = $request->file('image')->store('rooms','public');
         //     $data['image'] = $imgPath;
         // }
-
         $data['image'] = $request->file('image')->store('rooms','public');
 
         $store = Room::create($data);
@@ -44,6 +43,10 @@ class AdminController extends Controller
         return view('admin.view_rooms',compact('rooms'));
     }
     public function delete(Room $room){
+        $imgPath = public_path('storage/'.$room->image);
+        if(file_exists($imgPath)){
+            unlink($imgPath);
+        }
         $room->delete();
         return redirect(route('admin.dashboard'));
     }
