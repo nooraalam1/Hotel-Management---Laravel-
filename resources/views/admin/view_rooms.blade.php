@@ -28,7 +28,9 @@
                         <td>{{ $room->price }}</td>
                         <td>{{ $room->wifi }}</td>
                         <td>{{ $room->room_type }}</td>
-                        <td></td>
+                        <td>
+                            <img src="{{asset('storage/'.$room->image)}}" width="50"/>
+                        </td>
                         <td class="d-flex" style="gap: 10px">
                             <input class="btn btn-info" type="submit" value="Edit">
                             <div>
