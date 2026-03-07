@@ -35,7 +35,7 @@ class AdminController extends Controller
         $data['image'] = $request->file('image')->store('rooms','public');
 
         $store = Room::create($data);
-        return redirect(route('admin.dashboard'));
+        return redirect(route('admin.view_rooms'));
     }
 
     public function view_rooms(){
@@ -48,6 +48,6 @@ class AdminController extends Controller
             unlink($imgPath);
         }
         $room->delete();
-        return redirect(route('admin.dashboard'));
+        return redirect(route('admin.view_rooms'));
     }
 }
