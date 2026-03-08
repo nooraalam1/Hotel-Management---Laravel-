@@ -28,11 +28,6 @@ class AdminController extends Controller
             'room_type'=>'required'
         ]);
 
-        // if($request->hasFile('image')){
-
-        //     $imgPath = $request->file('image')->store('rooms','public');
-        //     $data['image'] = $imgPath;
-        // }
         $data['image'] = $request->file('image')->store('rooms','public');
 
         Room::create($data);
@@ -69,7 +64,6 @@ class AdminController extends Controller
         if($request->hasFile('image')){
             if($room->image){
                 Storage::disk('public')->delete($room->image);
-
             }
 
             $data['image'] = $request->file('image')->store('rooms','public');

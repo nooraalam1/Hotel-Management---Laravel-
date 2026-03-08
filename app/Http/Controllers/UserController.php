@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Room;
 
 class UserController extends Controller
 {
@@ -18,8 +19,9 @@ class UserController extends Controller
         return view('about');
     }
 
-    public function room(){
-        return view('room');
+    public function room(Room $room){
+        $rooms = Room::all();
+        return view('room',compact('rooms'));
     }
 
     public function gallery(){
