@@ -4,8 +4,9 @@
 
     <div class="page-content">
         <div class="page-header">
-            <div class="container-fluid">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
                 <h2 class="h5 no-margin-bottom">Room / Add Room</h2>
+                <a href="{{ route('admin.view_rooms') }}" class="btn btn-info">View Rooms</a>
             </div>
         </div>
         <section class="no-padding-top no-padding-bottom">

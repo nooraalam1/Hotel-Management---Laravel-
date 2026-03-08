@@ -5,8 +5,9 @@
 
     <div class="page-content">
         <div class="page-header">
-            <div class="container-fluid">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
                 <h2 class="h5 no-margin-bottom">Room / View Rooms</h2>
+                <a href="{{ route('admin.addRoom') }}" class="btn btn-info">Add Room</a>
             </div>
         </div>
         <section class="no-padding-top no-padding-bottom">
@@ -32,7 +33,7 @@
                             <img src="{{asset('storage/'.$room->image)}}" width="50"/>
                         </td>
                         <td class="d-flex" style="gap: 10px">
-                            <input class="btn btn-info" type="submit" value="Edit">
+                           <a href="{{route('admin.edit',['room'=>$room])}}" class="btn btn-info">Edit</a>
                             <div>
                                 <form action="{{route('admin.delete_room',['room'=>$room])}}" method="POST">
                                     @csrf

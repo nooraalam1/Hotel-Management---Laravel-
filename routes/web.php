@@ -14,6 +14,8 @@ Route::middleware(['auth', 'role:admin'])
         Route::post('/add_room', [AdminController::class, 'add_room'])->name('admin.add_room');
         Route::get('/view_rooms', [AdminController::class, 'view_rooms'])->name('admin.view_rooms');
         Route::delete('/delete_room/{room}', [AdminController::class, 'delete'])->name('admin.delete_room');
+        Route::get('/edit/{room}',[AdminController::class,'edit'])->name('admin.edit');
+        Route::put('/update/{room}',[AdminController::class,'update_room'])->name('admin.update_room');
     });
 
 Route::middleware(['auth', 'role:user'])

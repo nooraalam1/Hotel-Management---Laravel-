@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Room;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -34,7 +35,7 @@ class AdminController extends Controller
         // }
         $data['image'] = $request->file('image')->store('rooms','public');
 
-        $store = Room::create($data);
+        Room::create($data);
         return redirect(route('admin.view_rooms'));
     }
 
@@ -49,5 +50,33 @@ class AdminController extends Controller
         }
         $room->delete();
         return redirect(route('admin.view_rooms'));
+    }
+
+    public function edit(Room $room){
+        return view('admin.edit',compact('room'));
+    }
+
+    public function update_room(Request $request, Room $room){
+        $data = $request->validate([
+            'room_title'=>'nullable',
+            'image'=>'nullable | mimes:jpg,jpeg,png',
+            'description'=>'nullable',
+            'price'=>'required',
+            'wifi'=>'required',
+            'room_type'=>'required'
+        ]);
+
+        if($request->hasFile('image')){
+            if($room->image){
+                Storage::disk('public')->delete($room->image);
+
+            }
+
+            $data['image'] = $request->file('image')->store('rooms','public');
+        }
+
+        $room->update($data);
+        return redirect(route('admin.view_rooms'));
+
     }
 }

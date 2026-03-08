@@ -8,7 +8,7 @@
     </div>
 
     <ul class="list-unstyled">
-        <li class="active"><a href="{{ route('admin.dashboard') }}"> <i class="icon-home"></i>Home </a></li>
+        <li class="``"><a href="{{ route('admin.dashboard') }}"> <i class="icon-home"></i>Home </a></li>
         <li>
             <a href="{{ route('home') }}"> <i class="icon-logout"></i>Home Page </a>
         </li>
