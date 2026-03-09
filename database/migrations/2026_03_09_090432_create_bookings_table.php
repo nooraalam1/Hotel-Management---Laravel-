@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rooms', function (Blueprint $table) {
+        Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->string('room_title')->nullable();
-            $table->string('image')->nullable();
-            $table->string('description')->nullable();
-            $table->string('price')->nullable();
-            $table->string('wifi')->default('yes');
-            $table->string('room_type')->nullable();
+            $table->string('room_id')->nullable();
+            $table->string('name')->required();
+            $table->string('email')->required();
+            $table->string('phone')->required();
+            $table->string('start_date')->required();
+            $table->string('end_date')->required();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rooms');
+        Schema::dropIfExists('bookings');
     }
 };

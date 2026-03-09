@@ -31,8 +31,12 @@ class UserController extends Controller
     public function blog(){
         return view('blog');
     }
-    
+
     public function contact(){
         return view('contact');
+    }
+        public function room_details(Room $room){
+        $room = Room::findOrFail($room->id);
+        return view('admin.room_details',compact('room'));
     }
 }

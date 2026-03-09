@@ -37,23 +37,53 @@
     <!-- end loader -->
 
     @include('partials.header')
-    <div class="our_room">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-sm-6">
-                    <div id="serv_hover" class="room">
-                        <div class="room_img">
-                            <figure><img src="{{ asset('storage/' . $room->image) }}" alt="#" /></figure>
-                        </div>
-                        <div class="bed_room">
-                            <h3>{{ $room->room_title }}</h3>
-                            <h5>Wifi : {{ $room->wifi }}</h5>
-                            <h4>Type : {{ $room->room_type }}</h4>
-                            <h2 style="color:rgb(255, 95, 2)">Price : {{ $room->price }}</h2>
+    <div class="d-flex justify-content-center align-items-center gap-10">
+        <div class="our_room">
+            <div class="container">
+                <div class="row">
+                    <div class="">
+                        <div id="serv_hover" class="room">
+                            <div class="room_img">
+                                <figure><img src="{{ asset('storage/' . $room->image) }}" alt="#" /></figure>
+                            </div>
+                            <div class="bed_room">
+                                <h3>{{ $room->room_title }}</h3>
+                                <h5>Wifi : {{ $room->wifi }}</h5>
+                                <h4>Type : {{ $room->room_type }}</h4>
+                                <h2 style="color:rgb(255, 95, 2)">Price : {{ $room->price }}</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-6">
+            <form method="post">
+                @csrf
+                <div>
+                    <label>Name</label>
+                    <input type="text" name="name" class="form-control">
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control">
+                </div>
+                <div>
+                    <label>Phone</label>
+                    <input type="number" name="phone" class="form-control">
+                </div>
+                <div>
+                    <label>Start Date</label>
+                    <input type="date" name="start_date" min="{{ date('Y-m-d') }}" class="form-control">
+                </div>
+                <div>
+                    <label>End Date</label>
+                    <input type="date" name="end_date" min="{{ date('Y-m-d') }}" class="form-control">
+                </div>
+                <div>
+                    <input type="submit" value="Book Room" class="btn btn-primary form-control mt-4">
+                </div>
+            </form>
         </div>
     </div>
 

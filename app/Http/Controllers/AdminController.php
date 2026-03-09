@@ -71,8 +71,5 @@ class AdminController extends Controller
         return redirect(route('admin.view_rooms'));
     }
 
-    public function room_details(Room $room){
-        $room = Room::findOrFail($room->id);
-        return view('admin.room_details',compact('room'));
-    }
+
 }

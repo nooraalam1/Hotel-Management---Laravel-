@@ -23,7 +23,7 @@
                      <div class="bed_room">
                         <h3>{{$room->room_title}}</h3>
                         <p>{{$room->description}}</p>
-                        <a href="{{route('admin.room_details',['room'=>$room])}}" class="btn btn-danger">Room Details</a>
+                        <a href="{{route('room_details',['room'=>$room])}}" class="btn btn-danger">Room Details</a>
                      </div>
                   </div>
                </div>

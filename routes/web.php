@@ -16,7 +16,7 @@ Route::middleware(['auth', 'role:admin'])
         Route::delete('/delete_room/{room}', [AdminController::class, 'delete'])->name('admin.delete_room');
         Route::get('/edit/{room}',[AdminController::class,'edit'])->name('admin.edit');
         Route::put('/update/{room}',[AdminController::class,'update_room'])->name('admin.update_room');
-        Route::get('/room_details/{room}',[AdminController::class,'room_details'])->name('admin.room_details');
+
     });
 
 Route::middleware(['auth', 'role:user'])
@@ -30,6 +30,7 @@ Route::middleware(['auth', 'role:user'])
         Route::get('/gallery', [UserController::class, 'gallery'])->name('gallery');
         Route::get('/blog', [UserController::class, 'blog'])->name('blog');
         Route::get('/contact', [UserController::class, 'contact'])->name('contact');
+        Route::get('/room_details/{room}',[UserController::class,'room_details'])->name('room_details');
 
 Route::middleware('auth')
     ->group(function () {
