@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Room;
 use Illuminate\Support\Facades\Storage;
@@ -65,12 +64,15 @@ class AdminController extends Controller
             if($room->image){
                 Storage::disk('public')->delete($room->image);
             }
-
             $data['image'] = $request->file('image')->store('rooms','public');
         }
 
         $room->update($data);
         return redirect(route('admin.view_rooms'));
+    }
 
+    public function room_details(Room $room){
+        $room = Room::findOrFail($room->id);
+        return view('admin.room_details',compact('room'));
     }
 }

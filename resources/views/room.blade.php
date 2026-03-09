@@ -23,10 +23,11 @@
                      <div class="bed_room">
                         <h3>{{$room->room_title}}</h3>
                         <p>{{$room->description}}</p>
+                        <a href="{{route('admin.room_details',['room'=>$room])}}" class="btn btn-danger">Room Details</a>
                      </div>
                   </div>
-               </div>  
-               @endforeach           
+               </div>
+               @endforeach
             </div>
          </div>
       </div>
