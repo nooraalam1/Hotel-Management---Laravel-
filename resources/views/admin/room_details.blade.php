@@ -44,7 +44,8 @@
                     <div class="">
                         <div id="serv_hover" class="room">
                             <div class="room_img">
-                                <figure><img src="{{ asset('storage/' . $room->image) }}" alt="#" width="600px"/></figure>
+                                <figure><img src="{{ asset('storage/' . $room->image) }}" alt="#"
+                                        width="600px" /></figure>
                             </div>
                             <div class="bed_room">
                                 <h3>{{ $room->room_title }}</h3>
@@ -59,15 +60,16 @@
         </div>
         <div class="col-6">
             <h1 class="text-center">Book A Room</h1>
-            <form method="post" action="{{route('room_book',['room'=>$room])}}">
+            <form method="post" action="{{ route('room_book', ['room' => $room]) }}">
                 @csrf
                 <div>
                     <label>Name</label>
-                    <input type="text" name="name" class="form-control" value="{{auth()->user()->name ?? ""}}">
+                    <input type="text" name="name" class="form-control" value="{{ auth()->user()->name ?? '' }}">
                 </div>
                 <div>
                     <label>Email</label>
-                    <input type="email" name="email" class="form-control" value="{{auth()->user()->email ?? ""}}">
+                    <input type="email" name="email" class="form-control"
+                        value="{{ auth()->user()->email ?? '' }}">
                 </div>
                 <div>
                     <label>Phone</label>
@@ -76,10 +78,18 @@
                 <div>
                     <label>Start Date</label>
                     <input type="date" name="start_date" min="{{ date('Y-m-d') }}" class="form-control">
+
+                    @error('start_date')
+                        <h5 class="text-danger">{{ $message }}</h5>
+                    @enderror
                 </div>
                 <div>
                     <label>End Date</label>
                     <input type="date" name="end_date" min="{{ date('Y-m-d') }}" class="form-control">
+
+                    @error('end_date')
+                        <h5 class="text-danger">{{ $message }}</h5>
+                    @enderror
                 </div>
                 <div>
                     <input type="submit" value="Book Room" class="btn btn-primary form-control mt-4">

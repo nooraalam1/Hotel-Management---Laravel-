@@ -72,15 +72,15 @@ class AdminController extends Controller
         $room->update($data);
         return redirect(route('admin.view_rooms'));
     }
-    public function booking(Request $request){
+    public function booking(Request $request, Room $room){
         $data = $request->validate([
                 "name"=> "required | string | max: 20",
                 "email"=> "required",
                 "phone"=> "required",
-                "start_date" => "required | date",
-                "end_date" => "required | date",
+                "start_date" => "required | date | after_or_equal:today",
+                "end_date" => "required | date | after:start_date",
         ]);
-
+        $data["room_id"] = $room->id;
         Booking::create($data);
         return redirect(route("room"));
     }
