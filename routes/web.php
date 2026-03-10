@@ -23,7 +23,10 @@ Route::middleware(['auth', 'role:user'])
     ->group(function () {
         Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
     });
-
+Route::middleware(['auth','role:user,admin'])
+    ->group(function(){
+        Route::post('/booking/{room}',[AdminController::class,'booking'])->name('room_book');
+    });
         Route::get('/', [UserController::class, 'home'])->name('home');
         Route::get('/about', [UserController::class, 'about'])->name('about');
         Route::get('/room', [UserController::class, 'room'])->name('room');

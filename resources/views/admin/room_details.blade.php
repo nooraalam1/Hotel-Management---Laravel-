@@ -44,7 +44,7 @@
                     <div class="">
                         <div id="serv_hover" class="room">
                             <div class="room_img">
-                                <figure><img src="{{ asset('storage/' . $room->image) }}" alt="#" /></figure>
+                                <figure><img src="{{ asset('storage/' . $room->image) }}" alt="#" width="600px"/></figure>
                             </div>
                             <div class="bed_room">
                                 <h3>{{ $room->room_title }}</h3>
@@ -58,15 +58,16 @@
             </div>
         </div>
         <div class="col-6">
-            <form method="post">
+            <h1 class="text-center">Book A Room</h1>
+            <form method="post" action="{{route('room_book',['room'=>$room])}}">
                 @csrf
                 <div>
                     <label>Name</label>
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="name" class="form-control" value="{{auth()->user()->name ?? ""}}">
                 </div>
                 <div>
                     <label>Email</label>
-                    <input type="email" name="email" class="form-control">
+                    <input type="email" name="email" class="form-control" value="{{auth()->user()->email ?? ""}}">
                 </div>
                 <div>
                     <label>Phone</label>
