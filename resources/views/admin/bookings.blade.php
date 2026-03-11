@@ -34,8 +34,18 @@
                         <td>{{\App\Models\Room::findOrFail($booking->room_id)->room_title}}</td>
                         <td>{{\App\Models\Room::findOrFail($booking->room_id)->price}}</td>
                         <td>
-                            <a href="{{route('admin.booking_approve',['id'=>$booking->room_id])}}" class="btn btn-primary form-control" >Approve</a>
-                            <a href="{{route('admin.booking_reject',['id'=>$booking->room_id])}}" class="btn btn-warning form-control">Reject</a>
+                            <form action="{{route('admin.booking_approve',['id'=>$booking->room_id])}}" method="post">
+                            @csrf
+                            @method('put')
+                                <button class="btn btn-primary" >Approve</button>
+                            </form>
+
+                            <form method="post" action="{{route('admin.booking_reject',['id'=>$booking->room_id])}}">
+                            @csrf
+                            @method('put')
+                                <button class="btn btn-warning ">Reject</button>
+                            </form>
+                            
                         </td>
                         {{-- <td><img src="{{asset('storage/')}}/{{\App\Models\Room::findOrFail($booking->room_id)->image}}" alt="" width="100"></td> --}}
                     </tr>

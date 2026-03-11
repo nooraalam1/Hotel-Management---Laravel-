@@ -86,7 +86,7 @@
                 </div>
                 <div>
                     <label>Phone <span class="text-danger">*</span></label>
-                    <input type="number" name="phone" class="form-control">
+                    <input type="number" name="phone" value="{{auth()->user()->phone ?? ''}}" class="form-control">
                     @error('phone')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror

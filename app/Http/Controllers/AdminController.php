@@ -104,13 +104,17 @@ class AdminController extends Controller
         $bookings = Booking::all();
         return view('admin.bookings',compact('bookings'));
     }
-    public function booking_approve($id){
-        $data = Booking::findOrFail($id);
-        dd($data);
+    public function booking_approve(Request $request,Room $room, $id){
+        $data = Booking::findOrFail($id)->update([
+            "status"=>"approved",
+        ]);
 
+        return redirect(route('admin.bookings'));
     }
     public function booking_reject($id){
-        $data = Booking::findOrFail($id);
-
+        $data = Booking::findOrFail($id)->update([
+            "status"=>"rejected",
+        ]);
+        return redirect(route('admin.bookings'));
     }
 }
