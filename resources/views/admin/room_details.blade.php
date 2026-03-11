@@ -27,9 +27,11 @@
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
         media="screen">
+
 </head>
 
 <body class="main-layout">
+    <x-alerts/>
     <!-- loader  -->
     <div class="loader_bg">
         <div class="loader"><img src="{{ asset('images/loading.gif') }}" alt="#" /></div>
@@ -60,23 +62,37 @@
         </div>
         <div class="col-6">
             <h1 class="text-center">Book A Room</h1>
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             <form method="post" action="{{ route('room_book', ['room' => $room]) }}">
                 @csrf
                 <div>
-                    <label>Name</label>
+                    <label>Name <span class="text-danger">*</span></label>
                     <input type="text" name="name" class="form-control" value="{{ auth()->user()->name ?? '' }}">
+                    @error('name')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div>
-                    <label>Email</label>
+                    <label>Email <span class="text-danger">*</span></label>
                     <input type="email" name="email" class="form-control"
                         value="{{ auth()->user()->email ?? '' }}">
+                    @error('email')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div>
-                    <label>Phone</label>
+                    <label>Phone <span class="text-danger">*</span></label>
                     <input type="number" name="phone" class="form-control">
+                    @error('phone')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div>
-                    <label>Start Date</label>
+                    <label>Start Date <span class="text-danger">*</span></label>
                     <input type="date" name="start_date" min="{{ date('Y-m-d') }}" class="form-control">
 
                     @error('start_date')
@@ -84,11 +100,11 @@
                     @enderror
                 </div>
                 <div>
-                    <label>End Date</label>
+                    <label>End Date <span class="text-danger">*</span></label>
                     <input type="date" name="end_date" min="{{ date('Y-m-d') }}" class="form-control">
 
                     @error('end_date')
-                        <h5 class="text-danger">{{ $message }}</h5>
+                        <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
                 <div>
@@ -106,6 +122,7 @@
 
     <script src="{{ asset('js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
+
 </body>
 
 </html>

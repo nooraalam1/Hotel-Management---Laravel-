@@ -14,18 +14,17 @@ Route::middleware(['auth', 'role:admin'])
         Route::post('/add_room', [AdminController::class, 'add_room'])->name('admin.add_room');
         Route::get('/view_rooms', [AdminController::class, 'view_rooms'])->name('admin.view_rooms');
         Route::delete('/delete_room/{room}', [AdminController::class, 'delete'])->name('admin.delete_room');
-        Route::get('/edit/{room}',[AdminController::class,'edit'])->name('admin.edit');
-        Route::put('/update/{room}',[AdminController::class,'update_room'])->name('admin.update_room');
-
+        Route::get('/edit/{room}', [AdminController::class, 'edit'])->name('admin.edit');
+        Route::put('/update/{room}', [AdminController::class, 'update_room'])->name('admin.update_room');
     });
 
 Route::middleware(['auth', 'role:user'])
     ->group(function () {
         Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
     });
-Route::middleware(['auth','role:user,admin'])
-    ->group(function(){
-        Route::post('/booking/{room}',[AdminController::class,'booking'])->name('room_book');
+Route::middleware(['auth', 'role:user,admin'])
+    ->group(function () {
+        Route::post('/booking/{room}', [AdminController::class, 'booking'])->name('room_book');
     });
         Route::get('/', [UserController::class, 'home'])->name('home');
         Route::get('/about', [UserController::class, 'about'])->name('about');
@@ -33,7 +32,7 @@ Route::middleware(['auth','role:user,admin'])
         Route::get('/gallery', [UserController::class, 'gallery'])->name('gallery');
         Route::get('/blog', [UserController::class, 'blog'])->name('blog');
         Route::get('/contact', [UserController::class, 'contact'])->name('contact');
-        Route::get('/room_details/{room}',[UserController::class,'room_details'])->name('room_details');
+        Route::get('/room_details/{room}', [UserController::class, 'room_details'])->name('room_details');
 
 Route::middleware('auth')
     ->group(function () {
