@@ -94,7 +94,14 @@ class AdminController extends Controller
         if ($exists) {
             return redirect()->back()->with('error', 'Selected Dates are not Available! ');
         }
-        Booking::create($data);
-        return redirect(route("room"))->with('success',"Room booked successfully!");
+        else{
+            Booking::create($data);
+            return redirect(route("room"))->with('success',"Room booked successfully!");
+        }
+
+    }
+    public function bookings(){
+        $bookings = Booking::all();
+        return view('admin.bookings',compact('bookings'));
     }
 }

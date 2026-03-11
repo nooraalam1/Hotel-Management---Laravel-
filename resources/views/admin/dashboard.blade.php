@@ -14,7 +14,7 @@
                         <div class="statistic-block block">
                             <div class="progress-details d-flex align-items-end justify-content-between">
                                 <div class="title">
-                                    <div class="icon"><i class="icon-user-1"></i></div><strong>Total Clients</strong>
+                                    <div class="icon"><i class="icon-user-1"></i></div><strong>Total Users</strong>
                                 </div>
                                 <div class="number dashtext-1">{{ auth()->user()->count() }}</div>
                             </div>
@@ -28,9 +28,9 @@
                         <div class="statistic-block block">
                             <div class="progress-details d-flex align-items-end justify-content-between">
                                 <div class="title">
-                                    <div class="icon"><i class="icon-contract"></i></div><strong>New Projects</strong>
+                                    <div class="icon"><i class="icon-contract"></i></div><strong>Waiting Bookings</strong>
                                 </div>
-                                <div class="number dashtext-2"></div>
+                                <div class="number dashtext-2">{{\App\Models\Booking::count()}}</div>
                             </div>
                             <div class="progress progress-template">
                                 <div role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0"
