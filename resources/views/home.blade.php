@@ -38,19 +38,18 @@
                   <div class="col-md-5">
                      <div class="book_room">
                         <h1>Book a Room Online</h1>
-                        <form class="book_now">
+                        <form method="post" >
+                           @csrf
                            <div class="row">
                               <div class="col-md-12">
                                  <span>Arrival</span>
-                                 <img class="date_cua" src="{{asset('images/date.png')}}">
-                                 <input class="online_book" placeholder="dd/mm/yyyy" type="date" name="dd/mm/yyyy">
+                                 <input class="form-control" type="date" min={{date('Y-m-d')}} name="start_date">
                               </div>
                               <div class="col-md-12">
                                  <span>Departure</span>
-                                 <img class="date_cua" src="{{asset('images/date.png')}}">
-                                 <input class="online_book" placeholder="dd/mm/yyyy" type="date" name="dd/mm/yyyy">
+                                 <input class="form-control" type="date" min={{date('Y-m-d')}} name="end_date">
                               </div>
-                              <div class="col-md-12">
+                              <div class="col-md-12 mt-4">
                                  <button class="book_btn">Book Now</button>
                               </div>
                            </div>
