@@ -20,7 +20,7 @@
                     <th>Status</th>
                     <th>Room Title</th>
                     <th>Price</th>
-                    <th>Image</th>
+                    <th>Status Update</th>
                 </tr>
                 @forelse($bookings as $booking)
                     <tr>
@@ -33,7 +33,11 @@
                         <td>{{$booking->status}}</td>
                         <td>{{\App\Models\Room::findOrFail($booking->room_id)->room_title}}</td>
                         <td>{{\App\Models\Room::findOrFail($booking->room_id)->price}}</td>
-                        <td><img src="{{asset('storage/')}}/{{\App\Models\Room::findOrFail($booking->room_id)->image}}" alt="" width="100"></td>
+                        <td>
+                            <a href="{{route('admin.booking_approve',['id'=>$booking->room_id])}}" class="btn btn-primary form-control" >Approve</a>
+                            <a href="{{route('admin.booking_reject',['id'=>$booking->room_id])}}" class="btn btn-warning form-control">Reject</a>
+                        </td>
+                        {{-- <td><img src="{{asset('storage/')}}/{{\App\Models\Room::findOrFail($booking->room_id)->image}}" alt="" width="100"></td> --}}
                     </tr>
                 @empty
                     <h4>No Data Found</h4>

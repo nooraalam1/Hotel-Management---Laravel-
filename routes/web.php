@@ -17,6 +17,8 @@ Route::middleware(['auth', 'role:admin'])
         Route::get('/edit/{room}', [AdminController::class, 'edit'])->name('admin.edit');
         Route::put('/update/{room}', [AdminController::class, 'update_room'])->name('admin.update_room');
         Route::get('/bookings', [AdminController::class, 'bookings'])->name('admin.bookings');
+        Route::put('/booking/approve/{id}',[AdminController::class,'booking_approve'])->name('admin.booking_approve');
+        Route::put('/booking/reject/{id}',[AdminController::class,'booking_reject'])->name('admin.booking_reject');
     });
 
 Route::middleware(['auth', 'role:user'])
