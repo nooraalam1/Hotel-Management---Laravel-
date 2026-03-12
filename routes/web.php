@@ -29,8 +29,9 @@ Route::middleware(['auth', 'role:admin'])
         Route::get('/addblog',[AdminController::class,'addblog'])->name('admin.addblog');
         Route::get('/viewblog',[AdminController::class,'viewblog'])->name('admin.viewblog');
         Route::post('/blog/addblog',[AdminController::class,'addABlog'])->name('admin.addablog');
-
-
+        Route::get('/blog/edit/{blog}',[AdminController::class,'editBlog'])->name('admin.editBlog');
+        Route::put('/blog/update/{blog}',[AdminController::class,'updateBlog'])->name('admin.updateBlog');
+        Route::delete('/blog/delete/{blog}',[AdminController::class,'deleteBlog'])->name('admin.deleteBlog');
     });
 
 Route::middleware(['auth', 'role:user'])

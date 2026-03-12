@@ -139,15 +139,45 @@ class AdminController extends Controller
     public function addABlog(Request $request)
     {
         $blog = $request->validate([
-            'image' => 'nullable|mimes:jpg,jpeg,png|max:2048',
-            'title' => 'nullable|max:30',
+            'image' => 'required|mimes:jpg,jpeg,png|max:2048',
+            'title' => 'nullable|max:50',
             'tagline' => 'nullable',
-            'description' => 'nullable',
+            'description' => 'nullable|max:500',
         ]);
         if ($request->hasFile('image')) {
             $blog['image'] = $request->file('image')->store('blogs', 'public');
         }
         Blog::create($blog);
         return redirect()->route('admin.viewblog')->with('success', 'Blog Added Successfully');
+    }
+
+    public function editBlog(Blog $blog){
+        return view('admin.editblog',compact('blog'));
+    }
+    public function updateBlog(Request $request, Blog $blog){
+        $data = $request->validate([
+            'image'=>'nullable|mimes:jpg,jpeg,png',
+            'title' => 'nullable|max:50',
+            'tagline' => 'nullable',
+            'description' => 'nullable|max:500',
+        ]);
+        if ($request->hasFile('image')) {
+            if ($blog->image) {
+                Storage::disk('public')->delete($blog->image);
+            }
+            $data['image'] = $request->file('image')->store('blogs', 'public');
+        }
+        $blog->update($data);
+        return redirect()->route('admin.viewblog')->with('success','Blog Updated Successfully');
+    }
+
+    public function deleteBlog(Blog $blog){
+        $imgPath = public_path('storage/'.$blog->image);
+        if (file_exists($imgPath)){
+            unlink($imgPath);
+        }
+        $blog->delete();
+        return redirect()->route('admin.viewblog')->with('success','Deleted Successfully');
+
     }
 }

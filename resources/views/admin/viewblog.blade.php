@@ -1,5 +1,5 @@
 @extends('admin.partials.app')
-@section('title', 'Add Room')
+@section('title', 'View Blog')
 @section('content')
 
     <div class="page-content">
@@ -28,9 +28,9 @@
                             <img src="{{asset('storage/'.$blog->image)}}" width="50"/>
                         </td>
                         <td class="d-flex" style="gap: 10px">
-                           <a href="{{route('admin.edit',['room'=>$blog])}}" class="btn btn-info">Edit</a>
+                           <a href="{{route('admin.editBlog',['blog'=>$blog->id])}}" class="btn btn-info">Edit</a>
                             <div>
-                                <form action="{{route('admin.delete_room',['room'=>$blog])}}" method="POST">
+                                <form action="{{route('admin.deleteBlog',['blog'=>$blog])}}" method="POST">
                                     @csrf
                                     @method('delete')
                                     <input class="btn btn-warning" type="submit" value="Delete">
