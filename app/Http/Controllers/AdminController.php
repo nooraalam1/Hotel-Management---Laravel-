@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Booking;
-use Illuminate\Http\Request;
 use App\Models\Room;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
@@ -93,40 +94,60 @@ class AdminController extends Controller
             ->exists();
         if ($exists) {
             return redirect()->back()->with('error', 'Selected Dates are not Available! ');
-        }
-        else{
+        } else {
             Booking::create($data);
-            return redirect(route("room"))->with('success',"Room booked successfully!");
+            return redirect(route("room"))->with('success', "Room booked successfully!");
         }
-
     }
-    public function bookings(){
+    public function bookings()
+    {
         $bookings = Booking::all();
-        return view('admin.bookings',compact('bookings'));
+        return view('admin.bookings', compact('bookings'));
     }
-    public function booking_approve( $id){
+    public function booking_approve($id)
+    {
         $data = Booking::findOrFail($id)->update([
-            "status"=>"approved",
+            "status" => "approved",
         ]);
 
         return redirect(route('admin.bookings'));
     }
-    public function booking_reject($id){
+    public function booking_reject($id)
+    {
         $data = Booking::findOrFail($id)->update([
-            "status"=>"rejected",
+            "status" => "rejected",
         ]);
         return redirect(route('admin.bookings'));
     }
-    public function banner(){
+    public function banner()
+    {
         return view('admin.banner');
     }
-    public function gallery(){
+    public function gallery()
+    {
         return view('admin.gallery');
     }
-    public function addblog(){
+    public function addblog()
+    {
         return view('admin.addblog');
     }
-    public function viewblog(){
-        return view('admin.viewblog');
+    public function viewblog()
+    {
+        $blogs = Blog::all();
+        return view('admin.viewblog',compact('blogs'));
+    }
+    public function addABlog(Request $request)
+    {
+        $blog = $request->validate([
+            'image' => 'nullable|mimes:jpg,jpeg,png|max:2048',
+            'title' => 'nullable|max:30',
+            'tagline' => 'nullable',
+            'description' => 'nullable',
+        ]);
+        if ($request->hasFile('image')) {
+            $blog['image'] = $request->file('image')->store('blogs', 'public');
+        }
+        Blog::create($blog);
+        return redirect()->route('admin.viewblog')->with('success', 'Blog Added Successfully');
     }
 }

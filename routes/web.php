@@ -28,6 +28,7 @@ Route::middleware(['auth', 'role:admin'])
         //blog
         Route::get('/addblog',[AdminController::class,'addblog'])->name('admin.addblog');
         Route::get('/viewblog',[AdminController::class,'viewblog'])->name('admin.viewblog');
+        Route::post('/blog/addblog',[AdminController::class,'addABlog'])->name('admin.addablog');
 
 
     });
