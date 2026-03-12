@@ -117,4 +117,16 @@ class AdminController extends Controller
         ]);
         return redirect(route('admin.bookings'));
     }
+    public function banner(){
+        return view('admin.banner');
+    }
+    public function gallery(){
+        return view('admin.gallery');
+    }
+    public function addblog(){
+        return view('admin.addblog');
+    }
+    public function viewblog(){
+        return view('admin.viewblog');
+    }
 }

@@ -22,5 +22,19 @@
         <li>
             <a href="{{ route('admin.bookings') }}"> <i class="icon-logout"></i>Bookings </a>
         </li>
+        <li><a href="#exampledropdownDropdown2" aria-expanded="false" data-toggle="collapse"> <i
+                    class="icon-windows"></i>Image </a>
+            <ul id="exampledropdownDropdown2" class="collapse list-unstyled ">
+                <li><a href="{{route('admin.banner')}}">Banner</a></li>
+                <li><a href="{{route('admin.gallery')}}">Gallery</a></li>
+            </ul>
+        </li>
+        <li><a href="#exampledropdownDropdown3" aria-expanded="false" data-toggle="collapse"> <i
+                    class="icon-windows"></i>Blog </a>
+            <ul id="exampledropdownDropdown3" class="collapse list-unstyled ">
+                <li><a href="{{route('admin.addblog')}}">Add Blog</a></li>
+                <li><a href="{{route('admin.viewblog')}}">View Blog</a></li>
+            </ul>
+        </li>
     </ul>
 </nav>

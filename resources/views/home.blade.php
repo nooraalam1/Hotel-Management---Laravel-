@@ -12,7 +12,7 @@
             </ol>
             <div class="carousel-inner">
                <div class="carousel-item active">
-                  <img class="first-slide" src="{{asset('images/banner1.jpg')}}" alt="First slide">
+                  <img class="first-slide" src="{{asset('images/banner1.jpg')}}" width="100%"  alt="First slide">
                   <div class="container">
                   </div>
                </div>

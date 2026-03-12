@@ -19,6 +19,17 @@ Route::middleware(['auth', 'role:admin'])
         Route::get('/bookings', [AdminController::class, 'bookings'])->name('admin.bookings');
         Route::put('/booking/approve/{id}',[AdminController::class,'booking_approve'])->name('admin.booking_approve');
         Route::put('/booking/reject/{id}',[AdminController::class,'booking_reject'])->name('admin.booking_reject');
+
+        //banner route
+        Route::get('/banner',[AdminController::class,'banner'])->name('admin.banner');
+        //gallery route
+        Route::get('/gallery',[AdminController::class,'gallery'])->name('admin.gallery');
+
+        //blog
+        Route::get('/addblog',[AdminController::class,'addblog'])->name('admin.addblog');
+        Route::get('/viewblog',[AdminController::class,'viewblog'])->name('admin.viewblog');
+
+
     });
 
 Route::middleware(['auth', 'role:user'])
