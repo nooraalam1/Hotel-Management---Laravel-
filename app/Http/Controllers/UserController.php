@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Blog;
 use App\Models\Room;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -29,7 +30,8 @@ class UserController extends Controller
     }
 
     public function blog(){
-        return view('blog');
+        $blogs = Blog::all();
+        return view('blog',compact('blogs'));
     }
 
     public function contact(){
