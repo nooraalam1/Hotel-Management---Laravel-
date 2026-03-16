@@ -9,7 +9,7 @@
                 <a href="{{ route('admin.view_rooms') }}" class="btn btn-info">View Rooms</a>
             </div>
         </div>
-        <section class="no-padding-top no-padding-bottom">
+        <section class="no-padding-top no-padding-bottom block">
             <form action="{{ route('admin.add_room') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div>
