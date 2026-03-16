@@ -1,5 +1,5 @@
 @extends('admin.partials.app')
-@section('title', 'Add Room')
+@section('title', 'Add Blog')
 @section('content')
 
     <div class="page-content">
@@ -26,7 +26,7 @@
                 </div>
                 <div>
                     <label>Description</label>
-                    <input type="text" name="description" class="form-control">
+                    <textarea name="description" class="form-control"></textarea>
                 </div>
                 <input type="submit" value="Add Blog" class="btn btn-primary mt-4">
             </form>

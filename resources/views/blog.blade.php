@@ -27,7 +27,11 @@
                         </div>
                     </div>
                 @empty
+<<<<<<< HEAD
                     <h4 class="text-muted">No Data Found</h4>
+=======
+                <h4 class="d-flex justify-content-center">No Data Found</h4>
+>>>>>>> 5cf775b511adcd2423fcfeaa9f898b96f1587fdb
                 @endforelse
             </div>
         </div>
