@@ -38,6 +38,9 @@
                                 @csrf
                                 @method('put')
                                 <button class="btn btn-primary" @if (($booking->status)=='rejected') hidden @endif>Approve</button>
+                                @if ($booking->status=='rejected')
+                                <span class="text-danger">Rejected</span>
+                                @endif
                             </form>
 
                             <form action="{{ route('admin.booking_reject', ['id' => $booking->id]) }}" method="post">
@@ -50,7 +53,7 @@
                         {{-- <td><img src="{{asset('storage/')}}/{{\App\Models\Room::findOrFail($booking->room_id)->image}}" alt="" width="100"></td> --}}
                     </tr>
                 @empty
-                    <h4>No Data Found</h4>
+                    <h4 class="text-center">No Data Found</h4>
                 @endforelse
             </table>
         </section>

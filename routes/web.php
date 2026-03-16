@@ -17,20 +17,18 @@ Route::middleware(['auth', 'role:admin'])
         Route::get('/edit/{room}', [AdminController::class, 'edit'])->name('admin.edit');
         Route::put('/update/{room}', [AdminController::class, 'update_room'])->name('admin.update_room');
         Route::get('/bookings', [AdminController::class, 'bookings'])->name('admin.bookings');
-        Route::put('/booking/approve/{id}',[AdminController::class,'booking_approve'])->name('admin.booking_approve');
-        Route::put('/booking/reject/{id}',[AdminController::class,'booking_reject'])->name('admin.booking_reject');
+        Route::put('/booking/approve/{id}', [AdminController::class, 'booking_approve'])->name('admin.booking_approve');
+        Route::put('/booking/reject/{id}', [AdminController::class, 'booking_reject'])->name('admin.booking_reject');
 
         //banner route
-        Route::get('/banner',[AdminController::class,'banner'])->name('admin.banner');
+        Route::get('/banner', [AdminController::class, 'banner'])->name('admin.banner');
         //gallery route
-        Route::get('/gallery',[AdminController::class,'gallery'])->name('admin.gallery');
+        Route::get('/gallery', [AdminController::class, 'gallery'])->name('admin.gallery');
 
         //blog
-        Route::get('/addblog',[AdminController::class,'addblog'])->name('admin.addblog');
-        Route::get('/viewblog',[AdminController::class,'viewblog'])->name('admin.viewblog');
-        Route::post('/blog/addblog',[AdminController::class,'addABlog'])->name('admin.addablog');
-
-
+        Route::get('/addblog', [AdminController::class, 'addblog'])->name('admin.addblog');
+        Route::get('/viewblog', [AdminController::class, 'viewblog'])->name('admin.viewblog');
+        Route::post('/blog/addblog', [AdminController::class, 'addABlog'])->name('admin.addablog');
     });
 
 Route::middleware(['auth', 'role:user'])

@@ -30,12 +30,12 @@
                         <td>{{ $room->wifi }}</td>
                         <td>{{ $room->room_type }}</td>
                         <td>
-                            <img src="{{asset('storage/'.$room->image)}}" width="50"/>
+                            <img src="{{ asset('storage/' . $room->image) }}" width="50" />
                         </td>
                         <td class="d-flex" style="gap: 10px">
-                           <a href="{{route('admin.edit',['room'=>$room])}}" class="btn btn-info">Edit</a>
+                            <a href="{{ route('admin.edit', ['room' => $room]) }}" class="btn btn-info">Edit</a>
                             <div>
-                                <form action="{{route('admin.delete_room',['room'=>$room])}}" method="POST">
+                                <form action="{{ route('admin.delete_room', ['room' => $room]) }}" method="POST">
                                     @csrf
                                     @method('delete')
                                     <input class="btn btn-warning" type="submit" value="Delete">
@@ -48,5 +48,8 @@
                 @endforelse
             </table>
         </section>
+        <div class="d-flex justify-content-center align-items-center">
+            {{ $rooms->links() }}
+        </div>
     </div>
 @endsection

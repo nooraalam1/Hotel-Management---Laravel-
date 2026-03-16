@@ -7,6 +7,8 @@ use App\Models\Booking;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Pagination\Paginator;
+Paginator::useBootstrap();
 
 class AdminController extends Controller
 {
@@ -24,14 +26,14 @@ class AdminController extends Controller
     {
         $data = $request->validate([
             'room_title' => 'required',
-            'image' => 'required | mimes:jpg,jpeg,png',
+            'image' => 'required|mimes:jpg,jpeg,png',
             'description' => 'nullable',
             'price' => 'required',
             'wifi' => 'required',
             'room_type' => 'required'
         ]);
 
-        $data['image'] = $request->file('image')->store('rooms', 'public');
+        $data['image'] = $request->file('image')->store('rooms','public');
 
         Room::create($data);
         return redirect(route('admin.view_rooms'));
@@ -39,7 +41,7 @@ class AdminController extends Controller
 
     public function view_rooms()
     {
-        $rooms = Room::all();
+        $rooms = Room::latest()->paginate(10);
         return view('admin.view_rooms', compact('rooms'));
     }
     public function delete(Room $room)
@@ -61,7 +63,7 @@ class AdminController extends Controller
     {
         $data = $request->validate([
             'room_title' => 'nullable',
-            'image' => 'nullable | mimes:jpg,jpeg,png',
+            'image' => 'nullable|mimes:jpg,jpeg,png',
             'description' => 'nullable',
             'price' => 'required',
             'wifi' => 'required',
@@ -81,11 +83,11 @@ class AdminController extends Controller
     public function booking(Request $request, Room $room)
     {
         $data = $request->validate([
-            "name" => "required | string | max: 20",
+            "name" => "required|string| max: 20",
             "email" => "required",
             "phone" => "required",
-            "start_date" => "required | date | after_or_equal:today",
-            "end_date" => "required | date | after:start_date",
+            "start_date" => "required|date|after_or_equal:today",
+            "end_date" => "required|date|after:start_date",
         ]);
         $data["room_id"] = $room->id;
         $exists = Booking::where('room_id', $room->id)
@@ -96,7 +98,7 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Selected Dates are not Available! ');
         } else {
             Booking::create($data);
-            return redirect(route("room"))->with('success', "Room booked successfully!");
+            return redirect(route("room"))->with('success', "Booking is Pending! A Confirmation Email will be sent to you after approval.");
         }
     }
     public function bookings()
