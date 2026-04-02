@@ -25,6 +25,15 @@ Route::middleware(['auth', 'role:admin'])
         //gallery route
         Route::get('/gallery', [AdminController::class, 'gallery'])->name('admin.gallery');
 
+        //locations
+        Route::get('/addlocation',[AdminController::class,'addlocation'])->name('admin.addlocation');
+        Route::get('/viewlocations',[AdminController::class,'viewlocations'])->name('admin.viewlocations');
+        Route::post('/location/add',[AdminController::class,'createlocation'])->name('admin.createlocation');
+        Route::delete('/location/{id}',[AdminController::class,'deletelocation'])->name('admin.deletelocation');
+        Route::get('/location/edit/{id}',[AdminController::class,'editlocation'])->name('admin.editlocation');
+        Route::put('/location/update/{id}',[AdminController::class,'updatelocation'])->name('admin.updatelocation');
+
+
         //blog
         Route::get('/addblog',[AdminController::class,'addblog'])->name('admin.addblog');
         Route::get('/viewblog',[AdminController::class,'viewblog'])->name('admin.viewblog');

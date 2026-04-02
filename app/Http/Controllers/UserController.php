@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Location;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
@@ -42,6 +43,7 @@ class UserController extends Controller
         return view('admin.room_details',compact('room'));
     }
     public function locations(){
-        return view('locations');
+        $locations = Location::latest()->paginate(10);
+        return view('locations',compact('locations'));
     }
 }

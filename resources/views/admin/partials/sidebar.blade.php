@@ -14,8 +14,8 @@
         </li>
         <li><a href="#locationDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-map-marker" aria-hidden="true"></i>Locations </a>
             <ul id="locationDropdown" class="collapse list-unstyled ">
-                <li><a href="{{ route('admin.addRoom') }}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Location</a></li>
-                <li><a href="{{ route('admin.view_rooms') }}"><i class="fa fa-eye" aria-hidden="true"></i>View Locations</a></li>
+                <li><a href="{{ route('admin.addlocation') }}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Location</a></li>
+                <li><a href="{{ route('admin.viewlocations') }}"><i class="fa fa-eye" aria-hidden="true"></i>View Locations</a></li>
             </ul>
         </li>
         <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-bed" aria-hidden="true"></i>Rooms </a>

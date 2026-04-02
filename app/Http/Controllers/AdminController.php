@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Booking;
+use App\Models\Location;
 use App\Models\Room;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Storage;
 Paginator::useBootstrap();
 
 class AdminController extends Controller
@@ -181,5 +182,41 @@ class AdminController extends Controller
         $blog->delete();
         return redirect()->route('admin.viewblog')->with('success','Deleted Successfully');
 
+    }
+    public function addlocation(){
+        return view('admin.locations.add');
+    }
+    public function viewlocations(){
+        $locations = Location::latest()->paginate(10);
+        return view('admin.locations.view',compact('locations'));
+    }
+    public function createlocation(Request $request){
+        $data = $request->validate([
+            "location"=>["required","string"],
+            "hotel_name"=>["required","string"],
+            "division"=>["required"],
+        ]);
+
+        Location::create($data);
+        return redirect()->route('admin.viewlocations')->with('success','Location Added Successfully');
+    }
+    public function deletelocation($id){
+        $data = Location::findOrFail($id);
+        $data->delete();
+        return redirect()->route('admin.viewlocations')->with('success','Location Deleted Successfully');
+    }
+    public function editlocation($id){
+        $location = Location::findOrFail($id);
+        return view('admin.locations.edit',compact('location'));
+    }
+    public function updatelocation(Request $request,$id){
+        $data = $request->validate([
+            "location"=>["required","string"],
+            "hotel_name"=>["required","string"],
+            "division"=>["required"],
+        ]);
+    $location = Location::findOrFail($id);
+    $location->update($data);
+    return redirect()->route('admin.viewlocations')->with('success','Location Updated Successfully');
     }
 }
