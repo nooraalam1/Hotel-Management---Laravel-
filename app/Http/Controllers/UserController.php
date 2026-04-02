@@ -41,4 +41,7 @@ class UserController extends Controller
         $room = Room::findOrFail($room->id);
         return view('admin.room_details',compact('room'));
     }
+    public function locations(){
+        return view('locations');
+    }
 }

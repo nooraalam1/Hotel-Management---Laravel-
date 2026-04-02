@@ -34,32 +34,6 @@
         </div>
         <div class="booking_ocline">
             <div class="container">
-<<<<<<< HEAD
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="book_room">
-                            <h1>Book a Room Online</h1>
-                            <form method="post">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <span>Arrival</span>
-                                        <input class="form-control" type="date" min={{ date('Y-m-d') }}
-                                            name="start_date">
-                                    </div>
-                                    <div class="col-md-12">
-                                        <span>Departure</span>
-                                        <input class="form-control" type="date" min={{ date('Y-m-d') }} name="end_date">
-                                    </div>
-                                    <div class="col-md-12 mt-4">
-                                        <button class="book_btn">Book Now</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-=======
                <div class="row">
                   <div class="col-md-5">
                      <div class="book_room">
@@ -83,7 +57,6 @@
                      </div>
                   </div>
                </div>
->>>>>>> 5cf775b511adcd2423fcfeaa9f898b96f1587fdb
             </div>
         </div>
     </section>

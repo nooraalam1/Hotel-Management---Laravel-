@@ -26,18 +26,12 @@ Route::middleware(['auth', 'role:admin'])
         Route::get('/gallery', [AdminController::class, 'gallery'])->name('admin.gallery');
 
         //blog
-<<<<<<< HEAD
-        Route::get('/addblog', [AdminController::class, 'addblog'])->name('admin.addblog');
-        Route::get('/viewblog', [AdminController::class, 'viewblog'])->name('admin.viewblog');
-        Route::post('/blog/addblog', [AdminController::class, 'addABlog'])->name('admin.addablog');
-=======
         Route::get('/addblog',[AdminController::class,'addblog'])->name('admin.addblog');
         Route::get('/viewblog',[AdminController::class,'viewblog'])->name('admin.viewblog');
         Route::post('/blog/addblog',[AdminController::class,'addABlog'])->name('admin.addablog');
         Route::get('/blog/edit/{blog}',[AdminController::class,'editBlog'])->name('admin.editBlog');
         Route::put('/blog/update/{blog}',[AdminController::class,'updateBlog'])->name('admin.updateBlog');
         Route::delete('/blog/delete/{blog}',[AdminController::class,'deleteBlog'])->name('admin.deleteBlog');
->>>>>>> 5cf775b511adcd2423fcfeaa9f898b96f1587fdb
     });
 
 Route::middleware(['auth', 'role:user'])
@@ -52,6 +46,7 @@ Route::middleware(['auth', 'role:user,admin'])
         Route::get('/about', [UserController::class, 'about'])->name('about');
         Route::get('/room', [UserController::class, 'room'])->name('room');
         Route::get('/gallery', [UserController::class, 'gallery'])->name('gallery');
+        Route::get('/locations', [UserController::class, 'locations'])->name('locations');
         Route::get('/blog', [UserController::class, 'blog'])->name('blog');
         Route::get('/contact', [UserController::class, 'contact'])->name('contact');
         Route::get('/room_details/{room}', [UserController::class, 'room_details'])->name('room_details');

@@ -17,6 +17,7 @@
                   <li><a href="{{route('about')}}">About</a></li>
                   <li><a href="{{route('room')}}">Our Room</a></li>
                   <li><a href="{{route('gallery')}}">Gallery</a></li>
+                  <li><a href="{{route('locations')}}">Locations</a></li>
                   <li><a href="{{route('blog')}}">Blog</a></li>
                   <li><a href="{{route('contact')}}">Contact Us</a></li>
                </ul>
