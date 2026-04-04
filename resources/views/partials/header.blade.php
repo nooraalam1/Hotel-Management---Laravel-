@@ -32,7 +32,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ request()->routeIs('room') ? 'active' : '' }}"
-                                        href="{{ route('room') }}">Our room</a>
+                                        href="{{ route('room') }}">Rooms</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}"

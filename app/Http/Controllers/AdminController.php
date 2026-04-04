@@ -193,7 +193,8 @@ class AdminController extends Controller
     public function createlocation(Request $request){
         $data = $request->validate([
             "location"=>["required","string"],
-            "hotel_name"=>["required","string"],
+            "phone"=>["required","string"],
+            "email"=>["required","string"],
             "division"=>["required"],
         ]);
 

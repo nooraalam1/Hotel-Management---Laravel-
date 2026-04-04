@@ -43,7 +43,16 @@ class UserController extends Controller
         return view('admin.room_details',compact('room'));
     }
     public function locations(){
-        $locations = Location::latest()->paginate(10);
+        $locations = Location::latest()
+                    ->get()
+                    ->unique('location');
         return view('locations',compact('locations'));
+    }
+    public function hotelsInDivision($id){
+        $location = Location::findOrFail($id);
+        $hotels = Location::whereDivision($location->division)->get();
+        // $hotels = Location::where('division',$location->division)->get();
+
+        return view('divisionHotel',compact('location','hotels'));
     }
 }

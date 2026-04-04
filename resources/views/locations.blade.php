@@ -14,10 +14,12 @@
                         <div class="card col-12 col-md-6 col-lg-4 d-flex justify-content-center align-items-center" >
                             <img src="{{asset('/images/location.jpg')}}" width="200px" alt="location">
                             <div class="card-body text-center">
-
-                                <h3 class="card-title">{{ strtoupper($location->division) }}</h3>
-                                <p class="card-text">Total Hotels in the Division: </p>
-                                <a href="#" class="btn btn-primary">View All Hotels</a>
+                                {{-- {{dd($location)}} --}}
+                                <h3 class="mb-0">{{ strtoupper($location->location) }}</h3>
+                                <p class="">Division:{{ strtoupper($location->division) }} </p>
+                                <p class="">Manager Phone:{{ $location->phone }} </p>
+                                <p class="">Manager Email:{{ $location->email }} </p>
+                                <a href="{{route('hotelsInDivision',['id'=>$location->id])}}" class="btn btn-primary">View All in {{strtoupper($location->division)}}</a>
 
                             </div>
                         </div>

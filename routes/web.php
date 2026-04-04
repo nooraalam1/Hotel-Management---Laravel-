@@ -60,6 +60,9 @@ Route::middleware(['auth', 'role:user,admin'])
         Route::get('/contact', [UserController::class, 'contact'])->name('contact');
         Route::get('/room_details/{room}', [UserController::class, 'room_details'])->name('room_details');
 
+        //view hotels in one specific division
+        Route::get('/locations/division/viewall/{id}',[UserController::class,'hotelsInDivision'])->name('hotelsInDivision');
+
 Route::middleware('auth')
     ->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

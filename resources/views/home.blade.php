@@ -16,12 +16,6 @@
                     <div class="container">
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <img class="second-slide" src="{{ asset('images/banner2.jpg') }}" alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="third-slide" src="{{ asset('images/banner3.jpg') }}" alt="Third slide">
-                </div>
             </div>
             <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -59,6 +53,7 @@
                </div>
             </div>
         </div>
+
     </section>
 
 @endsection

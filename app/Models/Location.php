@@ -8,7 +8,8 @@ class Location extends Model
 {
     protected $fillable=[
         "location",
-        "hotel_name",
-        "division"
+        "phone",
+        "email",
+        "division",
     ];
 }

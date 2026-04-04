@@ -14,6 +14,8 @@
                     <th>SL</th>
                     <th>Location</th>
                     <th>Division</th>
+                    <th>Manager Mobile</th>
+                    <th>Manager Email</th>
                     <th>Action</th>
                 </tr>
                 @foreach ($locations as $key => $location)
@@ -21,6 +23,8 @@
                         <td>{{ $key + 1 }}</td>
                         <td>{{ $location->location }}</td>
                         <td>{{ $location->division }}</td>
+                        <td>{{ $location->phone }}</td>
+                        <td>{{ $location->email }}</td>
                         <td class="d-flex" style="gap: 10px">
                             <a href="{{route('admin.editlocation',['id'=>$location->id])}}" class="btn btn-info">Edit</a>
                             <div>
