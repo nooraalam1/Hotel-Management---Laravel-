@@ -20,25 +20,27 @@
                     <label>Description</label> </br>
                     <textarea name="description" class="form-control is-valid"></textarea>
                 </div>
-                <div>
-                    <label class="col-sm-3 form-control-label">Room Type</label>
-                    <div class="col-sm-5">
-                        <select name="room_type" class="form-control mb-3">
-                            <option>Select</option>
-                            <option value="regular">Regular</option>
-                            <option value="premium">Premium</option>
-                            <option value="deluxe">Deluxe</option>
-                        </select>
+                <div class="d-flex ">
+                    <div class="col-6 p-0">
+                        <label class="col-6 p-0 form-control-label">Room Type</label>
+                        <div class=" p-0">
+                            <select name="room_type" class="form-control">
+                                <option>Select</option>
+                                <option value="regular">Regular</option>
+                                <option value="premium">Premium</option>
+                                <option value="deluxe">Deluxe</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label class="col-sm-3 form-control-label">Wifi</label>
-                    <div class="col-sm-5">
-                        <select name="wifi" class="form-control mb-3">
-                            <option>Select</option>
-                            <option value="yes">Yes</option>
-                            <option selected value="no">No</option>
-                        </select>
+                    <div class="col-6 p-0">
+                        <label class=" p-0 form-control-label">Wifi</label>
+                        <div class="p-0">
+                            <select name="wifi" class="form-control mb-3">
+                                <option>Select</option>
+                                <option value="yes">Yes</option>
+                                <option selected value="no">No</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -56,7 +58,5 @@
 
             </form>
         </section>
-
     </div>
-
 @endsection

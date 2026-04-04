@@ -47,6 +47,17 @@
                 </li>
             </ul>
         </li>
+
+        {{-- facilities --}}
+        <li>
+            <a href="#facilities" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-map-marker"
+                    aria-hidden="true"></i>Facilities </a>
+            <ul id="facilities" class="collapse list-unstyled ">
+                <li><a href="{{ route('admin.addfacility') }}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add
+                        Facilities</a></li>
+                <li><a href="{{ route('admin.viewfacility') }}"><i class="fa fa-eye" aria-hidden="true"></i>View Facilities</a></li>
+            </ul>
+        </li>
         <li>
             <a href="{{ route('admin.bookings') }}"> <i class="icon-logout"></i>Booking Management </a>
         </li>

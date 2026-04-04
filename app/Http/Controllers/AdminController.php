@@ -220,4 +220,11 @@ class AdminController extends Controller
     $location->update($data);
     return redirect()->route('admin.viewlocations')->with('success','Location Updated Successfully');
     }
+    public function addfacility(){
+        return view('admin.facilities.add');
+    }
+    public function viewfacility(){
+        return view('admin.facilities.view');
+    }
+    
 }

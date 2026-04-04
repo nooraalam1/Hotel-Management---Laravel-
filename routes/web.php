@@ -41,6 +41,10 @@ Route::middleware(['auth', 'role:admin'])
         Route::get('/blog/edit/{blog}',[AdminController::class,'editBlog'])->name('admin.editBlog');
         Route::put('/blog/update/{blog}',[AdminController::class,'updateBlog'])->name('admin.updateBlog');
         Route::delete('/blog/delete/{blog}',[AdminController::class,'deleteBlog'])->name('admin.deleteBlog');
+
+        //facility
+        Route::get('/facility/add',[AdminController::class,'addfacility'])->name('admin.addfacility');
+        Route::get('/facility/view',[AdminController::class,'viewfacility'])->name('admin.viewfacility');
     });
 
 Route::middleware(['auth', 'role:user'])
