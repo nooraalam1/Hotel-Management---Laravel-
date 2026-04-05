@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Booking;
+use App\Models\Facility;
 use App\Models\Location;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Storage;
+
+use function PHPUnit\Framework\fileExists;
+
 Paginator::useBootstrap();
 
 class AdminController extends Controller
@@ -224,7 +228,36 @@ class AdminController extends Controller
         return view('admin.facilities.add');
     }
     public function viewfacility(){
-        return view('admin.facilities.view');
+         $facilities = Facility::all();
+
+        return view('admin.facilities.view',compact('facilities'));
     }
-    
+
+    public function createFacility(Request $request){
+        $data = $request->validate([
+            'name'=>['required','string'],
+            'image'=>['required','mimes:jpg,jpeg,png,svg','image'],
+        ]);
+
+        $data['image']= $request->file('image')->store('facility','public');
+        Facility::create($data);
+        return redirect()->route('admin.viewfacility')->with('success','Facility Added Successfully');
+    }
+
+    public function deleteFacility($id){
+        $data = Facility::findOrFail($id);
+        $imgPath = public_path($data->image);
+        // dd($imgPath);
+        if(file_exists($imgPath)){
+            unlink($imgPath);
+        }
+        else {
+        // Debug if file not found
+        dd("File not found at: " . $imgPath);
+    }
+
+        $data->delete();
+        return redirect()->route('admin.viewfacility')->with('success','Facility Deleted Successfully');
+    }
+
 }

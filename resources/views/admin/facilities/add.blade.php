@@ -10,17 +10,21 @@
             </div>
         </div>
         <div>
-            <form action="#" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.createFacility') }}" method="post" enctype="multipart/form-data">
             @csrf
-                <div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="col-6">
                     <label>Name</label>
                     <input type="text" name="name" class="form-control">
                 </div>
-                <div>
+                <div class="col-6">
                     <label>Image</label>
                     <input type="file" name="image" class="form-control">
                 </div>
-                <input type="submit" value="Add" class="btn btn-primary">
+                </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <input type="submit" value="Add" class="btn btn-primary">
+                </div>
             </form>
         </div>
     </div>
