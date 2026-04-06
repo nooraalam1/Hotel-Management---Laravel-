@@ -246,16 +246,10 @@ class AdminController extends Controller
 
     public function deleteFacility($id){
         $data = Facility::findOrFail($id);
-        $imgPath = public_path($data->image);
-        // dd($imgPath);
+        $imgPath = public_path(('storage/'.$data->image));
         if(file_exists($imgPath)){
             unlink($imgPath);
         }
-        else {
-        // Debug if file not found
-        dd("File not found at: " . $imgPath);
-    }
-
         $data->delete();
         return redirect()->route('admin.viewfacility')->with('success','Facility Deleted Successfully');
     }
