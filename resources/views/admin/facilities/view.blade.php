@@ -24,11 +24,11 @@
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $facility->name }}</td>
                             <td>
-                                <img src="{{ asset('storage/' . $facility->image) }}" width="100px" alt="">
+                                <img src="{{ asset('storage/' . $facility->image) }}" style="background-color: white" width="70px" height="auto" alt="">
                             </td>
 
                             <td class="d-flex" style="gap: 10px">
-                                <a href="#" class="btn btn-info">Edit</a>
+                                <a href="{{route('admin.editFacility',['id'=>$facility->id])}}" class="btn btn-info">Edit</a>
                                 <div>
                                     <form action="{{ route('admin.deleteFacility', ['id' => $facility->id]) }}" method="POST">
                                         @csrf
@@ -41,8 +41,9 @@
                     @endforeach
                 @else
                     <h4 class="text-danger text-center">No Facility Found</h4>
-                </table>
                 @endif
+            </table>
+            <div class="d-flex justify-content-center mt-2">{{$facilities->links()}}</div>
         </div>
     </div>
 @endsection

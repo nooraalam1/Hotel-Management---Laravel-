@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Facility;
 use App\Models\Location;
 use App\Models\Room;
 use Illuminate\Http\Request;
@@ -18,7 +19,8 @@ class UserController extends Controller
     }
 
     public function about(){
-        return view('about');
+        $facilities = Facility::all();
+        return view('about',compact('facilities'));
     }
 
     public function room(Room $room){

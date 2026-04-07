@@ -224,7 +224,7 @@ pre {
 
 .page-content {
     position: relative;
-    background: #22252a;
+    background: #2d3035;
     /* min-height: 100vh; */
     width: calc(100% - 280px);
     padding: 0;
@@ -2925,7 +2925,7 @@ body {
     font-weight: 400;
     line-height: 1.5;
     color: #8a8d93;
-    background-color: #fff;
+    background-color: #2d3035;
 }
 
 a {

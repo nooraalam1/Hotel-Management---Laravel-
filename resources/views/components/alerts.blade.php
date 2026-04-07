@@ -3,7 +3,7 @@
 <script>
     @if (session('success'))
         Swal.fire({
-            title: "{{session('success')}}",
+            title: "{{ session('success') }}",
             icon: "success",
             draggable: true
         });
@@ -13,8 +13,10 @@
         Swal.fire({
             icon: "error",
             title: "Failed",
-            text: "{{session('error')}}",
+            text: "{{ session('error') }}",
 
         });
     @endif
+
+
 </script>

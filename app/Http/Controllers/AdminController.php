@@ -38,7 +38,7 @@ class AdminController extends Controller
             'room_type' => 'required'
         ]);
 
-        $data['image'] = $request->file('image')->store('rooms','public');
+        $data['image'] = $request->file('image')->store('rooms', 'public');
 
         Room::create($data);
         return redirect(route('admin.view_rooms'));
@@ -141,7 +141,7 @@ class AdminController extends Controller
     public function viewblog()
     {
         $blogs = Blog::all();
-        return view('admin.viewblog',compact('blogs'));
+        return view('admin.viewblog', compact('blogs'));
     }
     public function addABlog(Request $request)
     {
@@ -158,12 +158,14 @@ class AdminController extends Controller
         return redirect()->route('admin.viewblog')->with('success', 'Blog Added Successfully');
     }
 
-    public function editBlog(Blog $blog){
-        return view('admin.editblog',compact('blog'));
+    public function editBlog(Blog $blog)
+    {
+        return view('admin.editblog', compact('blog'));
     }
-    public function updateBlog(Request $request, Blog $blog){
+    public function updateBlog(Request $request, Blog $blog)
+    {
         $data = $request->validate([
-            'image'=>'nullable|mimes:jpg,jpeg,png',
+            'image' => 'nullable|mimes:jpg,jpeg,png',
             'title' => 'nullable|max:50',
             'tagline' => 'nullable',
             'description' => 'nullable|max:500',
@@ -175,83 +177,116 @@ class AdminController extends Controller
             $data['image'] = $request->file('image')->store('blogs', 'public');
         }
         $blog->update($data);
-        return redirect()->route('admin.viewblog')->with('success','Blog Updated Successfully');
+        return redirect()->route('admin.viewblog')->with('success', 'Blog Updated Successfully');
     }
 
-    public function deleteBlog(Blog $blog){
-        $imgPath = public_path('storage/'.$blog->image);
-        if (file_exists($imgPath)){
+    public function deleteBlog(Blog $blog)
+    {
+        $imgPath = public_path('storage/' . $blog->image);
+        if (file_exists($imgPath)) {
             unlink($imgPath);
         }
         $blog->delete();
-        return redirect()->route('admin.viewblog')->with('success','Deleted Successfully');
-
+        return redirect()->route('admin.viewblog')->with('success', 'Deleted Successfully');
     }
-    public function addlocation(){
+    public function addlocation()
+    {
         return view('admin.locations.add');
     }
-    public function viewlocations(){
+    public function viewlocations()
+    {
         $locations = Location::latest()->paginate(10);
-        return view('admin.locations.view',compact('locations'));
+        return view('admin.locations.view', compact('locations'));
     }
-    public function createlocation(Request $request){
+    public function createlocation(Request $request)
+    {
         $data = $request->validate([
-            "location"=>["required","string"],
-            "phone"=>["required","string"],
-            "email"=>["required","string"],
-            "division"=>["required"],
+            "location" => ["required", "string"],
+            "phone" => ["required", "string"],
+            "email" => ["required", "string"],
+            "division" => ["required"],
         ]);
 
         Location::create($data);
-        return redirect()->route('admin.viewlocations')->with('success','Location Added Successfully');
+        return redirect()->route('admin.viewlocations')->with('success', 'Location Added Successfully');
     }
-    public function deletelocation($id){
+    public function deletelocation($id)
+    {
         $data = Location::findOrFail($id);
         $data->delete();
-        return redirect()->route('admin.viewlocations')->with('success','Location Deleted Successfully');
+        return redirect()->route('admin.viewlocations')->with('success', 'Location Deleted Successfully');
     }
-    public function editlocation($id){
+    public function editlocation($id)
+    {
         $location = Location::findOrFail($id);
-        return view('admin.locations.edit',compact('location'));
+        return view('admin.locations.edit', compact('location'));
     }
-    public function updatelocation(Request $request,$id){
+    public function updatelocation(Request $request, $id)
+    {
         $data = $request->validate([
-            "location"=>["required","string"],
-            "hotel_name"=>["required","string"],
-            "division"=>["required"],
+            "location" => ["required", "string"],
+            "hotel_name" => ["required", "string"],
+            "division" => ["required"],
         ]);
-    $location = Location::findOrFail($id);
-    $location->update($data);
-    return redirect()->route('admin.viewlocations')->with('success','Location Updated Successfully');
+        $location = Location::findOrFail($id);
+        $location->update($data);
+        return redirect()->route('admin.viewlocations')->with('success', 'Location Updated Successfully');
     }
-    public function addfacility(){
+    public function addfacility()
+    {
         return view('admin.facilities.add');
     }
-    public function viewfacility(){
-         $facilities = Facility::all();
+    public function viewfacility()
+    {
+        $facilities = Facility::latest()->paginate(5);
 
-        return view('admin.facilities.view',compact('facilities'));
+        return view('admin.facilities.view', compact('facilities'));
     }
 
-    public function createFacility(Request $request){
+    public function createFacility(Request $request)
+    {
         $data = $request->validate([
-            'name'=>['required','string'],
-            'image'=>['required','mimes:jpg,jpeg,png,svg','image'],
+            'name' => ['required', 'string'],
+            'image' => ['required', 'mimes:jpg,jpeg,png,svg', 'image'],
         ]);
 
-        $data['image']= $request->file('image')->store('facility','public');
+        $data['image'] = $request->file('image')->store('facility', 'public');
         Facility::create($data);
-        return redirect()->route('admin.viewfacility')->with('success','Facility Added Successfully');
+        return redirect()->route('admin.viewfacility')->with('success', 'Facility Added Successfully');
     }
 
-    public function deleteFacility($id){
+    public function deleteFacility($id)
+    {
         $data = Facility::findOrFail($id);
-        $imgPath = public_path(('storage/'.$data->image));
-        if(file_exists($imgPath)){
+        $imgPath = public_path(('storage/' . $data->image));
+
+        if (file_exists($imgPath)) {
             unlink($imgPath);
         }
         $data->delete();
-        return redirect()->route('admin.viewfacility')->with('success','Facility Deleted Successfully');
+        return redirect()->route('admin.viewfacility')->with('success', 'Facility Deleted Successfully');
     }
 
+    public function editFacility($id)
+    {
+        $facility = Facility::findOrFail($id);
+        return view('admin.facilities.edit', compact('facility'));
+    }
+    public function updateFacility(Request $request, $id)
+    {
+        $data = Facility::findOrFail($id);
+        $facility = $request->validate([
+            'name' => ['required', 'string'],
+            'image' => [ 'mimes:jpg,jpeg,png,svg', 'image'],
+        ]);
+        if ($request->hasFile('image')) {
+            if ($data->image) {
+                Storage::disk('public')->delete($data->image);
+            }
+        }
+        $facility['image'] = $request->file('image')->store('facility', 'public');
+
+        $data->update($facility);
+        return redirect()->route('admin.viewfacility')->with('success', 'Facility Updated');
+    }
 }

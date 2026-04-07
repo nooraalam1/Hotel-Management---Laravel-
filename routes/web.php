@@ -47,6 +47,8 @@ Route::middleware(['auth', 'role:admin'])
         Route::get('/facility/view',[AdminController::class,'viewfacility'])->name('admin.viewfacility');
         Route::post('/facility/create',[AdminController::class,'createFacility'])->name('admin.createFacility');
         Route::delete('/facility/delete/{id}',[AdminController::class,'deleteFacility'])->name('admin.deleteFacility');
+        Route::get('/facility/edit/{id}',[AdminController::class,'editFacility'])->name('admin.editFacility');
+        Route::put('/facility/update/{id}',[AdminController::class,'updateFacility'])->name('admin.updateFacility');
     });
 
 Route::middleware(['auth', 'role:user'])

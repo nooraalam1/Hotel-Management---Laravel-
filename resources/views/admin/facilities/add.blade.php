@@ -15,16 +15,19 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="col-6">
                     <label>Name</label>
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="name" class="form-control" required>
                 </div>
                 <div class="col-6">
                     <label>Image</label>
-                    <input type="file" name="image" class="form-control">
+                    <input type="file" accept=".jpg,.jpeg,.png,.svg" name="image" class="form-control" required>
                 </div>
                 </div>
                 <div class="d-flex justify-content-center mt-4">
                     <input type="submit" value="Add" class="btn btn-primary">
                 </div>
+                @error('image','name')
+                    <h4 class="text-danger">Error</h4>
+                @enderror
             </form>
         </div>
     </div>
