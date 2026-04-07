@@ -52,9 +52,9 @@ class UserController extends Controller
     }
     public function hotelsInDivision($id){
         $location = Location::findOrFail($id);
-        $hotels = Location::whereDivision($location->division)->get();
-        // $hotels = Location::where('division',$location->division)->get();
-
-        return view('divisionHotel',compact('location','hotels'));
+        // $hotels = Location::whereDivision($location->division)->get();
+        $hotels = Location::where('division',$location->division)->get();
+        // dd($hotels);
+        return view('divisionHotel',compact(['location','hotels']));
     }
 }

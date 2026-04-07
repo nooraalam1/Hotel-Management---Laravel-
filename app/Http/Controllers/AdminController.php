@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Booking;
+use App\Models\District;
+use App\Models\Division;
 use App\Models\Facility;
 use App\Models\Location;
 use App\Models\Room;
@@ -191,7 +193,9 @@ class AdminController extends Controller
     }
     public function addlocation()
     {
-        return view('admin.locations.add');
+        $districts = District::all();
+        $divisions = Division::all();
+        return view('admin.locations.add',compact(['districts','divisions']));
     }
     public function viewlocations()
     {
@@ -202,11 +206,11 @@ class AdminController extends Controller
     {
         $data = $request->validate([
             "location" => ["required", "string"],
+            "district" => ["required", "string"],
+            "division" => ["required"],
             "phone" => ["required", "string"],
             "email" => ["required", "string"],
-            "division" => ["required"],
         ]);
-
         Location::create($data);
         return redirect()->route('admin.viewlocations')->with('success', 'Location Added Successfully');
     }

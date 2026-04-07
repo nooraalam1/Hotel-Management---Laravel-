@@ -24,7 +24,6 @@
                 <h1 class="text-center mb-4 fw-bold">Our Facilities</h1>
 
                 <div class="row g-4 ">
-
                     @foreach ($facilities as $facility)
                         <div class="col-6 col-sm-4 col-md-3 col-lg-2 mt-2">
                             <div class="card h-100 text-center shadow-sm border-0 facility-card">
@@ -39,11 +38,9 @@
                                         {{ $facility->name }}
                                     </p>
                                 </div>
-
                             </div>
                         </div>
                     @endforeach
-
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@
                     <div>
                         <ol>
                             @foreach ($hotels as $hotel)
-                                {{-- <li>{{$hotel->hotel_name}}</li> --}}
+                                <li>{{$hotel->location}}</li>
                             @endforeach
                         </ol>
                     </div>

@@ -14,10 +14,6 @@
                 @csrf
                 @method('PUT')
                 <div>
-                    <label>Hotel Name</label>
-                    <input name="hotel_name" class="form-control" value="{{$location->hotel_name}}"></input>
-                </div>
-                <div>
                     <label>Location</label>
                     <input type="text" name="location" class="form-control" value="{{$location->location}}">
                 </div>
