@@ -32,6 +32,7 @@ Route::middleware(['auth', 'role:admin'])
         Route::delete('/location/{id}',[AdminController::class,'deletelocation'])->name('admin.deletelocation');
         Route::get('/location/edit/{id}',[AdminController::class,'editlocation'])->name('admin.editlocation');
         Route::put('/location/update/{id}',[AdminController::class,'updatelocation'])->name('admin.updatelocation');
+        Route::get('/get-district/{id}',[AdminController::class,'getDistrict'])->name('getDistrict');
 
 
         //blog

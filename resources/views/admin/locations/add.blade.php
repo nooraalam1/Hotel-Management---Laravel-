@@ -60,11 +60,16 @@
                     </div>
                     <div class="col-3 p-0">
                         <label>District</label>
-                        <input type="text" name="district" class="form-control" required>
+                        <select name="district" id="district" class="form-control" required>
+                            <option value="">Select</option>
+                            @foreach ($districts as $district)
+                                <option  value="{{ $district->id }}">{{ $district->district_name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-3 p-0">
                         <label class="">Division</label>
-                        <input type="text" name="division" class="form-control" id="">
+                        <input type="text" name="division" class="form-control" id="division" readonly>
                     </div>
                     <div class="col-3 p-0">
                         <label>Location Manager Mobile</label>
@@ -80,5 +85,23 @@
                 </div>
             </form>
         </section>
+        <script>
+            $(document).ready(function() {
+                $('#district').on('change', function() {
+                    const districtId = $(this).val()
+
+                    if (districtId) {
+                        $.ajax({
+                            url: '/admin/get-district/' + districtId,
+                            type: 'get',
+                            success: function(data) {
+                                // $('#district').val(data.district_name);
+                                $('#division').val(data.division_name);
+                            }
+                        })
+                    }
+                })
+            })
+        </script>
     </div>
 @endsection

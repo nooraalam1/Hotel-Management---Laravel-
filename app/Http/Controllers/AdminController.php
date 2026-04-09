@@ -195,7 +195,7 @@ class AdminController extends Controller
     {
         $districts = District::all();
         $divisions = Division::all();
-        return view('admin.locations.add',compact(['districts','divisions']));
+        return view('admin.locations.add', compact(['districts', 'divisions']));
     }
     public function viewlocations()
     {
@@ -281,7 +281,7 @@ class AdminController extends Controller
         $data = Facility::findOrFail($id);
         $facility = $request->validate([
             'name' => ['required', 'string'],
-            'image' => [ 'mimes:jpg,jpeg,png,svg', 'image'],
+            'image' => ['mimes:jpg,jpeg,png,svg', 'image'],
         ]);
         if ($request->hasFile('image')) {
             if ($data->image) {
@@ -292,5 +292,14 @@ class AdminController extends Controller
 
         $data->update($facility);
         return redirect()->route('admin.viewfacility')->with('success', 'Facility Updated');
+    }
+    public function getDistrict($id){
+        $district = District::findOrFail($id);
+        // dd($district->district_name,$district->division->division_name);
+        return response()->json([
+            'district_name'=>$district->district_name,
+            'division_name'=>$district->division->division_name,
+        ])
+        ;
     }
 }
