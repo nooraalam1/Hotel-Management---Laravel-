@@ -27,35 +27,35 @@ a {
 }
 
 .dashtext-1 {
-    color: #864DD9 !important;
+    color: #ffffff !important;
 }
 
 .dashtext-2 {
-    color: #CF53F9 !important;
+    color: #ffffff !important;
 }
 
 .dashtext-3 {
-    color: #e95f71 !important;
+    color: #ffffff !important;
 }
 
 .dashtext-4 {
-    color: #7127AC !important;
+    color: #ffffff !important;
 }
 
 .dashbg-1 {
-    background: #864DD9;
+    background: #ffffff;
 }
 
 .dashbg-2 {
-    background: #CF53F9;
+    background: #ffffff;
 }
 
 .dashbg-3 {
-    background: #e95f71;
+    background: #ffffff;
 }
 
 .dashbg-4 {
-    background: #7127AC;
+    background: #ffffff;
 }
 
 .text-bold {
@@ -203,7 +203,7 @@ pre {
 .block {
     padding: 20px;
     background: #2d3035;
-    color: #8a8d93;
+    color: #ffffff;
     /* margin-bottom: 30px; */
 }
 
@@ -413,14 +413,14 @@ nav.navbar .sidebar-toggle {
     text-align: center;
     border-radius: 50%;
     background: #282b2f;
-    color: #8a8d93;
+    color: #ffffff;
     font-size: 1.1rem;
     border: 2px solid #3d4148;
     outline: none;
 }
 
 nav.navbar a {
-    color: inherit;
+    color: #e91e63;
 }
 
 nav.navbar .brand-text {
@@ -732,13 +732,13 @@ nav.navbar .dropdown .dropdown-menu.active {
 nav#sidebar {
     width: 280px;
     background: #2d3035;
-    color: #6a6c70;
+    color: #ffffff;
     border-right: 1px solid #34373d;
     /* shrinked navbar */
 }
 
 nav#sidebar a {
-    color: inherit;
+    color: #f5f6f9;
     text-decoration: none;
     position: relative;
 }
@@ -779,7 +779,7 @@ nav#sidebar .sidebar-header p {
 }
 
 nav#sidebar .sidebar-header h1 {
-    color: #8a8d93;
+    color: #ffffff;
 }
 
 nav#sidebar .sidebar-header p {
@@ -1037,14 +1037,14 @@ nav#sidebar.shrinked a[aria-expanded="true"]::after {
 .statistic-block strong {
     text-transform: uppercase;
     font-size: 0.9rem;
-    color: #8a8d93;
+    color: #ffffff;
     margin-bottom: 5px;
 }
 
 .statistic-block .icon {
     margin-bottom: 5;
     font-size: 1.2rem;
-    color: #8a8d93;
+    color: #ffffff;
 }
 
 .statistic-block .number {
@@ -2062,7 +2062,7 @@ input.input-material~label.is-invalid~label {
 
 .table td,
 .table th {
-    border-color: #343a40;
+    border-color: #ffffff;
 }
 
 .table thead th {
@@ -2924,7 +2924,7 @@ body {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #8a8d93;
+    color: #ffffff;
     background-color: #2d3035;
 }
 
@@ -2955,7 +2955,7 @@ h6,
     font-family: inherit;
     font-weight: 700;
     line-height: 1.2;
-    color: inherit;
+    color: #ffffff;
 }
 
 h1,
@@ -3246,7 +3246,7 @@ a.bg-dark:hover {
 }
 
 .text-primary {
-    color: #DB6574 !important;
+    color: #ffeb3b !important;
 }
 
 a.text-primary:focus,
