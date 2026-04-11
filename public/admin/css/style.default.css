@@ -1712,10 +1712,10 @@ nav#sidebar.shrinked a[aria-expanded="true"]::after {
 */
 .form-control {
     height: calc(2.4rem + 2px);
-    border: 1px solid #444951;
+    border: 1px solid #03a9f4;
     background: transparent;
     border-radius: 0;
-    color: #979a9f;
+    color: #ffffff;
     padding: 0.45rem 0.75rem;
 }
 
@@ -1738,9 +1738,9 @@ nav#sidebar.shrinked a[aria-expanded="true"]::after {
 }
 
 .form-control:focus {
-    color: #979a9f;
+    color: #ffffff;
     background-color: transparent;
-    border-color: #DB6574;
+    border-color: #00ff00;
     outline: none;
     -webkit-box-shadow: 0 0 0 0.2rem rgba(219, 101, 116, 0.25);
     box-shadow: 0 0 0 0.2rem rgba(219, 101, 116, 0.25);
@@ -1873,7 +1873,7 @@ input[type='submit'] {
 
 form label {
     font-size: .9rem;
-    color: #8a8d93;
+    color: #ffffff;
 }
 
 .checkbox-template,
