@@ -12,7 +12,7 @@
         </div>
         <section class="no-padding-top no-padding-bottom">
 
-            <table class="table">
+            <table class="table text-center">
                 <tr>
                     <th>Room Title</th>
                     <th>Description</th>

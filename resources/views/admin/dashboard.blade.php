@@ -42,10 +42,9 @@
                         <div class="statistic-block block">
                             <div class="progress-details d-flex align-items-end justify-content-between">
                                 <div class="title">
-                                    <div class="icon"><i class="icon-paper-and-pencil"></i></div><strong>New
-                                        Invoices</strong>
+                                    <div class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></div><strong>Locations</strong>
                                 </div>
-                                <div class="number dashtext-3"></div>
+                                <div class="number dashtext-3">{{\App\Models\Location::count()}}</div>
                             </div>
                             <div class="progress progress-template">
                                 <div role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0"

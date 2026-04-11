@@ -1747,6 +1747,7 @@ nav#sidebar.shrinked a[aria-expanded="true"]::after {
 }
 
 .form-control:focus {
+    background-color: #2d3035;
     -webkit-box-shadow: none;
     box-shadow: none;
 }

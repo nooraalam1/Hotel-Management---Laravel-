@@ -11,7 +11,7 @@
             </div>
         </div>
         <section class="no-padding-top no-padding-bottom">
-            <table class="table">
+            <table class="table text-center">
                 <tr>
                     <th>Title</th>
                     <th>Tagline</th>

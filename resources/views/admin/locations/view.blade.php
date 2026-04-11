@@ -9,7 +9,7 @@
                     <a href="{{ route('admin.addlocation') }}" class="btn btn-info">Add Location</a>
                 </div>
             </div>
-            <table class="table">
+            <table class="table text-center">
                 <tr>
                     <th>SL</th>
                     <th>Location</th>
@@ -25,7 +25,7 @@
                         <td>{{ $location->division }}</td>
                         <td>{{ $location->phone }}</td>
                         <td>{{ $location->email }}</td>
-                        <td class="d-flex" style="gap: 10px">
+                        <td class="d-flex justify-content-center " style="gap: 10px">
                             <a href="{{route('admin.editlocation',['id'=>$location->id])}}" class="btn btn-info">Edit</a>
                             <div>
                                 <form action="{{route("admin.deletelocation",["id"=>$location->id])}}" method="POST">

@@ -15,7 +15,7 @@
                 <div class="">
                     <div class="col-6 p-0">
                         <label>District</label>
-                        <select name="district" id="district" class="form-control" required style="background-color: #2d3035">
+                        <select name="district" id="district" class="form-control" required >
                             <option value="">Select</option>
                             @foreach ($districts as $district)
                                 <option  value="{{ $district->id }}">{{ $district->district_name }}</option>
