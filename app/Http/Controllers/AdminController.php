@@ -7,6 +7,7 @@ use App\Models\Booking;
 use App\Models\District;
 use App\Models\Division;
 use App\Models\Facility;
+use App\Models\Hotel;
 use App\Models\Location;
 use App\Models\Room;
 use Illuminate\Http\Request;
@@ -299,7 +300,28 @@ class AdminController extends Controller
         return response()->json([
             'district_name'=>$district->district_name,
             'division_name'=>$district->division->division_name,
-        ])
-        ;
+        ]);
+    }
+    public function addHotel(){
+        $locations = Location::all();
+        return view('admin.hotel.add',compact('locations'));
+    }
+
+    public function createHotel(Request $request){
+        $hotel = $request->validate([
+            'title'=>['required','string','max:300'],
+            'location'=>['required','string'],
+            'image'=>['required','mimes:png,jpg,jpeg,svg'],
+            'phone'=>['required'],
+            'email'=>['required'],
+            'status'=>['required']
+        ]);
+        $hotel['image']= $request->file('image')->store('hotels','public');
+        Hotel::create($hotel);
+        return redirect()->route('admin.viewHotels')->with('success','Hotel Added Successfully');
+    }
+    public function viewHotels(){
+        $hotels = Hotel::latest()->get();
+        return view('admin.hotel.view',compact('hotels'));
     }
 }

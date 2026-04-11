@@ -31,8 +31,8 @@
                 <li><a href="#hotels" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-university"
                             aria-hidden="true"></i>Hotel </a>
                     <ul id="hotels" class="collapse list-unstyled ">
-                        <li><a href="#"> <i class="fa fa-plus-circle" aria-hidden="true"></i>Add Hotel</a></li>
-                        <li><a href="#"><i class="fa fa-eye" aria-hidden="true"></i>View
+                        <li><a href="{{ route('admin.addHotel') }}"> <i class="fa fa-plus-circle" aria-hidden="true"></i>Add Hotel</a></li>
+                        <li><a href="{{ route('admin.viewHotels') }}"><i class="fa fa-eye" aria-hidden="true"></i>View
                                 Hotels</a></li>
                     </ul>
                 </li>

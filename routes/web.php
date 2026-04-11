@@ -50,6 +50,11 @@ Route::middleware(['auth', 'role:admin'])
         Route::delete('/facility/delete/{id}',[AdminController::class,'deleteFacility'])->name('admin.deleteFacility');
         Route::get('/facility/edit/{id}',[AdminController::class,'editFacility'])->name('admin.editFacility');
         Route::put('/facility/update/{id}',[AdminController::class,'updateFacility'])->name('admin.updateFacility');
+
+        //Hotel
+        Route::get('/hotel/add',[AdminController::class,'addHotel'])->name('admin.addHotel');
+        Route::post('/hotel/create',[AdminController::class,'createHotel'])->name('admin.createHotel');
+        Route::get('/hotel/view',[AdminController::class,'viewHotels'])->name('admin.viewHotels');
     });
 
 Route::middleware(['auth', 'role:user'])
