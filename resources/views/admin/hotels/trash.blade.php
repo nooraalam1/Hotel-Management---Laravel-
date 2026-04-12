@@ -1,13 +1,13 @@
 @extends('admin.partials.app')
-@section('title', 'View Hotel')
+@section('title', 'Deleted Hotels')
 @section('content')
 
     <div class="page-content">
         <div class="page-header">
             <div class="container-fluid d-flex justify-content-between align-items-center">
-                <h2 class="h5 no-margin-bottom">Hotel | View Hotel</h2>
+                <h2 class="h5 no-margin-bottom">Hotel | Deleted Hotels</h2>
                 <a href="{{ route('admin.addHotel') }}" class="btn btn-info">Add Hotel</a>
-                <a href="{{route('admin.trashedHotels')}}" class="btn btn-success">Deleted Hotels</a>
+                <a href="{{route('admin.viewHotels')}}" class="btn btn-success">View Hotels</a>
             </div>
         </div>
         <section class="no-padding-top no-padding-bottom">
@@ -34,11 +34,11 @@
                             <td class="align-middle"><img src="{{ asset('storage/' . $hotel->image) }}" width="100px" height="100px"
                                     alt="hotel_img"></td>
                             <td class="">
-                                <a href="{{route('admin.editHotel',['id'=>$hotel->id])}}" class="btn btn-info col mb-2">Edit</a>
-                                <form action="{{route('admin.deleteHotel',['id'=>$hotel->id])}}" method="POST">
+                                <a href="#" class="btn btn-info col mb-2"><i class="fa fa-undo" aria-hidden="true"></i> Restore</a>
+                                <form action="#" method="POST">
                                     @csrf
                                     @method('delete')
-                                    <input class="btn btn-warning col" type="submit" value="Delete" onclick="return confirm('Are You Sure?')">
+                                    <input class="btn btn-warning col" type="submit" value="Permanent Delete" onclick="return confirm('Are You Sure?')">
                                 </form>
                             </td>
                         </tr>

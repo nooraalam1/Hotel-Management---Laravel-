@@ -31,7 +31,7 @@
                                 <form action="{{route("admin.deletelocation",["id"=>$location->id])}}" method="POST">
                                     @csrf
                                     @method('delete')
-                                    <input class="btn btn-warning" type="submit" value="Delete">
+                                    <input class="btn btn-warning" type="submit" value="Delete" onclick="return confirm('Are You Sure?')">
                                 </form>
                             </div>
                         </td>

@@ -224,14 +224,17 @@ class AdminController extends Controller
     public function editlocation($id)
     {
         $location = Location::findOrFail($id);
-        return view('admin.locations.edit', compact('location'));
+        $districts = District::all();
+        return view('admin.locations.edit', compact('location','districts'));
     }
     public function updatelocation(Request $request, $id)
     {
         $data = $request->validate([
             "location" => ["required", "string"],
-            "hotel_name" => ["required", "string"],
+            "district" => ["required", "string"],
             "division" => ["required"],
+            "phone" => ["required", "string"],
+            "email" => ["required", "string"],
         ]);
         $location = Location::findOrFail($id);
         $location->update($data);
@@ -357,5 +360,9 @@ class AdminController extends Controller
         $hotel['image']=$request->file('image')->store('hotels','public');
         $data->update($hotel);
         return redirect()->route('admin.viewHotels')->with('success','Hotel Updated Successfully');
+    }
+    public function trashedHotels(){
+        $hotels=Hotel::onlyTrashed()->get();
+        return view('admin.hotels.trash',compact('hotels'));
     }
 }

@@ -28,7 +28,7 @@
                 </div>
                 <div style="">
                     <label>Image</label>
-                    <input type="file" name="image" class="form-control dropify" required accept=".jpg,.jpeg,.png,.svg" >
+                    <input type="file" name="image" class="form-control dropify" accept=".jpg,.jpeg,.png,.svg" >
                     <div>
                         <a href="{{asset('storage/'.$hotel->image)}}" target="_blank"> View Current Image</a>
                     </div>

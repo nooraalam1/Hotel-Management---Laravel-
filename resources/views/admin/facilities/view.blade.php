@@ -19,22 +19,22 @@
                     </tr>
                     @foreach ($facilities as $key => $facility)
                         <tr>
-                            <td>{{ $key + 1 }}</td>
-                            <td>{{ $facility->name }}</td>
-                            <td>
-                                <img src="{{ asset('storage/' . $facility->image) }}" style="background-color: white"
+                            <td class="align-middle">{{ $key + 1 }}</td>
+                            <td class="align-middle">{{ $facility->name }}</td>
+                            <td class="align-middle">
+                                <img src="{{ asset('storage/' . $facility->image) }}" style="background-color: rgb(255, 255, 255)"
                                     width="70px" height="auto" alt="">
                             </td>
 
-                            <td class="d-flex justify-content-center" style="gap: 10px">
+                            <td class="">
                                 <a href="{{ route('admin.editFacility', ['id' => $facility->id]) }}"
-                                    class="btn btn-info">Edit</a>
+                                    class="btn btn-info col mb-2">Edit</a>
                                 <div>
                                     <form action="{{ route('admin.deleteFacility', ['id' => $facility->id]) }}"
                                         method="POST">
                                         @csrf
                                         @method('delete')
-                                        <input class="btn btn-warning" type="submit" value="Delete">
+                                        <input class="btn btn-warning col" type="submit" value="Delete">
                                     </form>
                                 </div>
                             </td>
