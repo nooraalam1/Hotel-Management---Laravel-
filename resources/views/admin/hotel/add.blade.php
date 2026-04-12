@@ -21,7 +21,7 @@
                     <select class="form-control" name="location" required>
                     <option>Select</option>
                     @foreach ($locations as $location)
-                        <option value="{{ $location->location }}">{{ $location->location }},{{$location->division_name }}</option>
+                        <option value="{{ $location->location }}">{{ $location->location }},{{$location->division}}</option>
                     @endforeach
                     </select>
                 </div>
