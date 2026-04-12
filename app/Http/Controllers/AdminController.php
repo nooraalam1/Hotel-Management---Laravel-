@@ -311,7 +311,7 @@ class AdminController extends Controller
         $hotel = $request->validate([
             'title'=>['required','string','max:300'],
             'location'=>['required','string'],
-            'image'=>['required','mimes:png,jpg,jpeg,svg'],
+            'image'=>['nullable','mimes:png,jpg,jpeg,svg'],
             'phone'=>['required'],
             'email'=>['required'],
             'status'=>['required']
@@ -326,7 +326,36 @@ class AdminController extends Controller
     }
     public function deleteHotel($id){
         $data = Hotel::findOrFail($id);
+        $imgPath = public_path('storage/'.$data->image);
+        if($data->image){
+            unlink($imgPath);
+        }
         $data->delete();
         return redirect()->route('admin.viewHotels')->with('success','Hotel Deleted Successfully');
+    }
+    public function editHotel($id){
+        $locations = Location::all();
+        $hotel = Hotel::findOrFail($id);
+        return view('admin.hotels.edit',compact('hotel','locations'));
+    }
+    public function updateHotel(Request $request, $id){
+        $data = Hotel::findOrFail($id);
+        $hotel = $request->validate([
+            'title'=>['required','string','max:300'],
+            'location'=>['required','string'],
+            'image'=>['nullable','mimes:png,jpg,jpeg,svg'],
+            'phone'=>['required'],
+            'email'=>['required'],
+            'status'=>['required']
+        ]);
+        if($request->hasFile('image')){
+            if($data->image){
+                unlink(public_path('storage/'.$data->image));
+                // Storage::disk('public')->delete($data->image);
+            }
+        }
+        $hotel['image']=$request->file('image')->store('hotels','public');
+        $data->update($hotel);
+        return redirect()->route('admin.viewHotels')->with('success','Hotel Updated Successfully');
     }
 }

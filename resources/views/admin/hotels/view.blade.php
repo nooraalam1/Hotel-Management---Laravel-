@@ -34,7 +34,7 @@
                             <td class="align-middle"><img src="{{ asset('storage/' . $hotel->image) }}" width="100px" height="100px"
                                     alt="hotel_img"></td>
                             <td class="">
-                                <a href="#" class="btn btn-info col mb-2">Edit</a>
+                                <a href="{{route('admin.editHotel',['id'=>$hotel->id])}}" class="btn btn-info col mb-2">Edit</a>
                                 <form action="{{route('admin.deleteHotel',['id'=>$hotel->id])}}" method="POST">
                                     @csrf
                                     @method('delete')
