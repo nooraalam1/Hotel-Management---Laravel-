@@ -25,9 +25,9 @@
                     @endforeach
                     </select>
                 </div>
-                <div>
+                <div style="">
                     <label>Image</label>
-                    <input type="file" name="image" class="form-control" required accept=".jpg,.jpeg,.png,.svg">
+                    <input type="file" name="image" class="form-control dropify" required accept=".jpg,.jpeg,.png,.svg">
                 </div>
                 <div>
                     <label>Phone</label>
@@ -49,4 +49,7 @@
             </form>
         </section>
     </div>
+    <script>
+        $('.dropify').dropify();
+    </script>
 @endsection

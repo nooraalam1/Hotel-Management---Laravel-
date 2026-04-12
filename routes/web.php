@@ -55,6 +55,7 @@ Route::middleware(['auth', 'role:admin'])
         Route::get('/hotel/add',[AdminController::class,'addHotel'])->name('admin.addHotel');
         Route::post('/hotel/create',[AdminController::class,'createHotel'])->name('admin.createHotel');
         Route::get('/hotel/view',[AdminController::class,'viewHotels'])->name('admin.viewHotels');
+        Route::delete('/hotels/delete/{id}',[AdminController::class,'deleteHotel'])->name('admin.deleteHotel');
     });
 
 Route::middleware(['auth', 'role:user'])

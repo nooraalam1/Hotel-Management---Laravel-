@@ -304,7 +304,7 @@ class AdminController extends Controller
     }
     public function addHotel(){
         $locations = Location::all();
-        return view('admin.hotel.add',compact('locations'));
+        return view('admin.hotels.add',compact('locations'));
     }
 
     public function createHotel(Request $request){
@@ -321,7 +321,12 @@ class AdminController extends Controller
         return redirect()->route('admin.viewHotels')->with('success','Hotel Added Successfully');
     }
     public function viewHotels(){
-        $hotels = Hotel::latest()->get();
-        return view('admin.hotel.view',compact('hotels'));
+        $hotels = Hotel::all();
+        return view('admin.hotels.view',compact('hotels'));
+    }
+    public function deleteHotel($id){
+        $data = Hotel::findOrFail($id);
+        $data->delete();
+        return redirect()->route('admin.viewHotels')->with('success','Hotel Deleted Successfully');
     }
 }
