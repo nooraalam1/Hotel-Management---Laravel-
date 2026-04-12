@@ -34,6 +34,8 @@
                         <li><a href="{{ route('admin.addHotel') }}"> <i class="fa fa-plus-circle" aria-hidden="true"></i>Add Hotel</a></li>
                         <li><a href="{{ route('admin.viewHotels') }}"><i class="fa fa-eye" aria-hidden="true"></i>View
                                 Hotels</a></li>
+                        <li><a href="{{ route('admin.trashedHotels') }}"><i class="fa fa-trash" aria-hidden="true"></i>Deleted
+                                Hotels</a></li>
                     </ul>
                 </li>
                 <li><a href="#rooms" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-bed"
