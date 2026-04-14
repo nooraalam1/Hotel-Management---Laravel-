@@ -26,7 +26,7 @@
 
 
 (14, 2, 'Chattogram'),
-(15, 2, 'Cox\'s Bazar'),
+(15, 2, 'Coxs Bazar'),
 (16, 2, 'Comilla'),
 (17, 2, 'Feni'),
 (18, 2, 'Brahmanbaria'),

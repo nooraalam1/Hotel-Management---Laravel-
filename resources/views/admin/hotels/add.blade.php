@@ -13,17 +13,17 @@
             <form action="{{ route('admin.createHotel') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div>
-                    <label>Title</label>
-                    <input type="text" name="title" class="form-control" required>
-                </div>
-                <div>
                     <label>Location</label>
                     <select class="form-control" name="location" required>
                     <option>Select</option>
                     @foreach ($locations as $location)
-                        <option value="{{ $location->location }}">{{ $location->location }},{{$location->division}}</option>
+                        <option value="{{ $location->location }}">{{ $location->location }}, Division: {{$location->division}}</option>
                     @endforeach
                     </select>
+                </div>
+                <div>
+                    <label>Title</label>
+                    <input type="text" name="title" class="form-control" required>
                 </div>
                 <div style="">
                     <label>Image</label>

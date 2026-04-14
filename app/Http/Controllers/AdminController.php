@@ -311,6 +311,7 @@ class AdminController extends Controller
     }
 
     public function createHotel(Request $request){
+        
         $hotel = $request->validate([
             'title'=>['required','string','max:300'],
             'location'=>['required','string'],
@@ -319,6 +320,7 @@ class AdminController extends Controller
             'email'=>['required'],
             'status'=>['required']
         ]);
+        dd($hotel);
         $hotel['image']= $request->file('image')->store('hotels','public');
         Hotel::create($hotel);
         return redirect()->route('admin.viewHotels')->with('success','Hotel Added Successfully');

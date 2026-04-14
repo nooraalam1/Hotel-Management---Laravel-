@@ -9,4 +9,8 @@ class Hotel extends Model
 {
     use SoftDeletes;
     protected $fillable=['title','image','location','phone','email','status'];
+
+    public function locations(){
+        return $this->belongsTo(Location::class);
+    }
 }

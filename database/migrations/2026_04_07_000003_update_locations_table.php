@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('locations', function (Blueprint $table) {
             $table->string('district');
+            $table->softDeletes();
         });
     }
 
@@ -23,6 +24,7 @@ return new class extends Migration
     {
         Schema::table('locations', function (Blueprint $table) {
             $table->dropColumn('district');
+            $table->dropSoftDeletes();
         });
     }
 };
