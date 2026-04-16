@@ -300,14 +300,14 @@ class AdminController extends Controller
         $data     = Facility::findOrFail($id);
         $facility = $request->validate([
             'name'  => ['required', 'string'],
-            'image' => ['mimes:jpg,jpeg,png,svg', 'image'],
+            'image' => ['nullable','mimes:jpg,jpeg,png,svg', 'image'],
         ]);
         if ($request->hasFile('image')) {
             if ($data->image) {
                 Storage::disk('public')->delete($data->image);
             }
+            $facility['image'] = $request->file('image')->store('facility', 'public');
         }
-        $facility['image'] = $request->file('image')->store('facility', 'public');
 
         $data->update($facility);
         return redirect()->route('admin.viewfacility')->with('success', 'Facility Updated');

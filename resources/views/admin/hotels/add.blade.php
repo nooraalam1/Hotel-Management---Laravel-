@@ -15,10 +15,11 @@
                 <div>
                     <label>Location</label>
                     <select class="form-control" name="location_id" required>
-                    <option>Select</option>
-                    @foreach ($locations as $location)
-                        <option value="{{ $location->id }}">{{ $location->location }}, Division: {{$location->division}}</option>
-                    @endforeach
+                        <option>Select</option>
+                        @foreach ($locations as $location)
+                            <option value="{{ $location->id }}">{{ $location->location }}, Division:
+                                {{ $location->division }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div>
@@ -27,7 +28,8 @@
                 </div>
                 <div>
                     <label>Image</label>
-                    <input type="file" name="image" class="form-control dropify" required accept=".jpg,.jpeg,.png,.svg">
+                    <input type="file" name="image" class="form-control dropify" required
+                        accept=".jpg,.jpeg,.png,.svg">
                 </div>
                 <div>
                     <label>Phone</label>
@@ -40,7 +42,7 @@
                 <div>
                     <label>Status</label>
                     <select name="status" class="form-control" required>
-                        <option >Select</option>
+                        <option>Select</option>
                         <option value="active">Active</option>
                         <option value="inactive">Inactive</option>
                     </select>
