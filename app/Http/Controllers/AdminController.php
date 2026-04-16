@@ -189,6 +189,8 @@ class AdminController extends Controller
         $blog->delete();
         return redirect()->route('admin.viewblog')->with('success', 'Deleted Successfully');
     }
+
+    //Location
     public function addlocation()
     {
         $districts = District::all();
@@ -237,6 +239,22 @@ class AdminController extends Controller
         $location->update($data);
         return redirect()->route('admin.viewlocations')->with('success', 'Location Updated Successfully');
     }
+    public function trashedLocations(){
+        $locations = Location::onlyTrashed()->get();
+        return view('admin.locations.trash',compact('locations'));
+    }
+    public function restoreLocation($id){
+        $data = Location::onlyTrashed()->findOrFail($id);
+        $data->restore();
+        return redirect()->route('admin.trashedLocations')->with('success','Restored Successfully');
+    }
+    public function permanentDelete($id){
+        $data = Location::onlyTrashed()->findOrFail($id);
+        $data->forceDelete();
+        return redirect()->route('admin.trashedLocations')->with('success','Permanently Deleted');
+    }
+
+    //Facility
     public function addfacility()
     {
         return view('admin.facilities.add');

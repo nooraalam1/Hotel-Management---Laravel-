@@ -14,21 +14,25 @@
                 </div>
             </div>
             <div class="row">
-                @foreach ($rooms as $room)
-                    <div class="col-md-4 col-sm-6">
-                        <div id="serv_hover" class="room">
-                            <div class="room_img">
-                                <figure><img src="{{ asset('storage/' . $room->image) }}" alt="#" /></figure>
-                            </div>
-                            <div class="bed_room">
-                                <h3>{{ $room->room_title }}</h3>
-                                <p>{{ $room->description }}</p>
-                                <a href="{{ route('room_details', ['room' => $room]) }}" class="btn btn-danger">Room
-                                    Details</a>
+                @if ($rooms->count() > 0)
+                    @foreach ($rooms as $room)
+                        <div class="col-md-4 col-sm-6">
+                            <div id="serv_hover" class="room">
+                                <div class="room_img">
+                                    <figure><img src="{{ asset('storage/' . $room->image) }}" alt="#" /></figure>
+                                </div>
+                                <div class="bed_room">
+                                    <h3>{{ $room->room_title }}</h3>
+                                    <p>{{ $room->description }}</p>
+                                    <a href="{{ route('room_details', ['room' => $room]) }}" class="btn btn-danger">Room
+                                        Details</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                @else
+                    <h1 class="text-danger text-center fw-bold">Nothing Found !</h1>
+                @endif
             </div>
         </div>
     </div>

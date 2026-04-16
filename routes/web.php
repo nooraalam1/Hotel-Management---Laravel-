@@ -33,7 +33,9 @@ Route::middleware(['auth', 'role:admin'])
         Route::get('/location/edit/{id}',[AdminController::class,'editlocation'])->name('admin.editlocation');
         Route::put('/location/update/{id}',[AdminController::class,'updatelocation'])->name('admin.updatelocation');
         Route::get('/get-district/{id}',[AdminController::class,'getDistrict'])->name('getDistrict');
-
+        Route::get('/location/trashed',[AdminController::class,'trashedLocations'])->name('admin.trashedLocations');
+        Route::put('/location/restore/{id}',[AdminController::class,'restoreLocation'])->name('admin.restoreLocation');
+        Route::delete('/location/permanentDelete/{id}',[AdminController::class,'permanentDelete'])->name('admin.permanentDelete');
 
         //blog
         Route::get('/addblog',[AdminController::class,'addblog'])->name('admin.addblog');

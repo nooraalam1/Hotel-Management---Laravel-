@@ -22,6 +22,7 @@
                         Location</a></li>
                 <li><a href="{{ route('admin.viewlocations') }}"><i class="fa fa-eye" aria-hidden="true"></i>View
                         Locations</a></li>
+                <li><a href="{{ route('admin.trashedLocations') }}"><i class="fa fa-trash" aria-hidden="true"></i>Deleted Locations</a></li>
             </ul>
         </li>
         <li>
@@ -31,11 +32,12 @@
                 <li><a href="#hotels" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-university"
                             aria-hidden="true"></i>Hotels </a>
                     <ul id="hotels" class="collapse list-unstyled ">
-                        <li><a href="{{ route('admin.addHotel') }}"> <i class="fa fa-plus-circle" aria-hidden="true"></i>Add Hotel</a></li>
+                        <li><a href="{{ route('admin.addHotel') }}"> <i class="fa fa-plus-circle"
+                                    aria-hidden="true"></i>Add Hotel</a></li>
                         <li><a href="{{ route('admin.viewHotels') }}"><i class="fa fa-eye" aria-hidden="true"></i>View
                                 Hotels</a></li>
-                        <li><a href="{{ route('admin.trashedHotels') }}"><i class="fa fa-trash" aria-hidden="true"></i>Deleted
-                                Hotels</a></li>
+                        <li><a href="{{ route('admin.trashedHotels') }}"><i class="fa fa-trash"
+                                    aria-hidden="true"></i>Deleted Hotels</a></li>
                     </ul>
                 </li>
                 <li><a href="#rooms" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-bed"
@@ -52,10 +54,13 @@
 
         {{-- facilities --}}
         <li>
-            <a href="#facilities" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-bath" aria-hidden="true"></i>Facilities </a>
+            <a href="#facilities" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-bath"
+                    aria-hidden="true"></i>Facilities </a>
             <ul id="facilities" class="collapse list-unstyled ">
-                <li><a href="{{ route('admin.addfacility') }}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Facilities</a></li>
-                <li><a href="{{ route('admin.viewfacility') }}"><i class="fa fa-eye" aria-hidden="true"></i>View Facilities</a></li>
+                <li><a href="{{ route('admin.addfacility') }}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add
+                        Facilities</a></li>
+                <li><a href="{{ route('admin.viewfacility') }}"><i class="fa fa-eye" aria-hidden="true"></i>View
+                        Facilities</a></li>
             </ul>
         </li>
         <li>
@@ -75,7 +80,8 @@
             <ul id="blog" class="collapse list-unstyled ">
                 <li><a href="{{ route('admin.addblog') }}"><i class="fa fa-plus-circle" aria-hidden="true"></i>Add
                         Blog</a></li>
-                <li><a href="{{ route('admin.viewblog') }}"><i class="fa fa-eye" aria-hidden="true"></i> View Blog</a>
+                <li><a href="{{ route('admin.viewblog') }}"><i class="fa fa-eye" aria-hidden="true"></i> View
+                        Blog</a>
                 </li>
             </ul>
         </li>
