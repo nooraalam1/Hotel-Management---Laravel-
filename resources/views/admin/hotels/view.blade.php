@@ -5,7 +5,7 @@
     <div class="page-content">
         <div class="page-header">
             <div class="container-fluid d-flex justify-content-between align-items-center">
-                <h2 class="h5 no-margin-bottom">Hotel | View Hotel</h2>
+                <h2 class="h3">Hotel | View Hotel</h2>
                 <a href="{{ route('admin.addHotel') }}" class="btn btn-info">Add Hotel</a>
                 <a href="{{route('admin.trashedHotels')}}" class="btn btn-success">Deleted Hotels</a>
             </div>

@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Hotel extends Model
 {
     use SoftDeletes;
-    protected $fillable=['title','image','location','phone','email','status'];
+    protected $fillable=['title','image','location_id','phone','email','status','location'];
 
-    public function locations(){
+    public function location(){
         return $this->belongsTo(Location::class);
     }
 }

@@ -26,10 +26,10 @@
         </li>
         <li>
             <a href="#main" aria-expanded="false" data-toggle="collapse"><i class="fa fa-hospital-o"
-                    aria-hidden="true"></i>Hotel</a>
+                    aria-hidden="true"></i>Hotels & Rooms</a>
             <ul id="main" class="collapse list-unstyled">
                 <li><a href="#hotels" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-university"
-                            aria-hidden="true"></i>Hotel </a>
+                            aria-hidden="true"></i>Hotels </a>
                     <ul id="hotels" class="collapse list-unstyled ">
                         <li><a href="{{ route('admin.addHotel') }}"> <i class="fa fa-plus-circle" aria-hidden="true"></i>Add Hotel</a></li>
                         <li><a href="{{ route('admin.viewHotels') }}"><i class="fa fa-eye" aria-hidden="true"></i>View

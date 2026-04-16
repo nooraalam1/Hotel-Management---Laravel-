@@ -5,7 +5,7 @@
     <div class="page-content">
         <div class="page-header">
             <div class="container-fluid d-flex justify-content-between align-items-center">
-                <h2 class="h5 no-margin-bottom">Hotel | Add Hotel</h2>
+                <h2 class="h3">Hotel | Add Hotel</h2>
                 <a href="{{ route('admin.viewHotels') }}" class="btn btn-info">View Hotels</a>
             </div>
         </div>
@@ -14,10 +14,10 @@
                 @csrf
                 <div>
                     <label>Location</label>
-                    <select class="form-control" name="location" required>
+                    <select class="form-control" name="location_id" required>
                     <option>Select</option>
                     @foreach ($locations as $location)
-                        <option value="{{ $location->location }}">{{ $location->location }}, Division: {{$location->division}}</option>
+                        <option value="{{ $location->id }}">{{ $location->location }}, Division: {{$location->division}}</option>
                     @endforeach
                     </select>
                 </div>
@@ -25,7 +25,7 @@
                     <label>Title</label>
                     <input type="text" name="title" class="form-control" required>
                 </div>
-                <div style="">
+                <div>
                     <label>Image</label>
                     <input type="file" name="image" class="form-control dropify" required accept=".jpg,.jpeg,.png,.svg">
                 </div>

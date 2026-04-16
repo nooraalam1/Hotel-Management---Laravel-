@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('location_id')->constrained()->onDelete('cascade');
             $table->string('title')->required();
             $table->string('image')->required();
-            $table->string('location')->required();
+            $table->string('location')->nullable();
             $table->string('phone')->required();
             $table->string('email')->required();
             $table->string('status')->required();
