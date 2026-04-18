@@ -41,12 +41,9 @@
                     <div class="col-6 p-0">
                         <label class=" p-0 form-control-label">Facilities</label>
                         <div class="p-0">
-                            <select name="facility" class="form-control mb-3">
-                                <option>Select</option>
                                 @foreach ($facilities as $facility)
-                                    <option value="{{ $facility->name }}">{{ $facility->name }} </option>
+                                    <input class="" type="checkbox" name="facility[]" value="{{ $facility->name }}">{{ $facility->name }} </input>
                                 @endforeach
-                            </select>
                         </div>
                     </div>
                 </div>
@@ -68,7 +65,7 @@
                     <option>Select</option>
                     <option value="single">Single</option>
                     <option value="double">Double</option>
-                    <option value="king">King</option>           
+                    <option value="king">King</option>
                     </select>
                 </div>
                 <div >
@@ -77,7 +74,7 @@
                     <option>Select</option>
                     <option value="available">Available</option>
                     <option value="booked">Booked</option>
-                    <option value="maintenance">Maintenance</option>           
+                    <option value="maintenance">Maintenance</option>
                     </select>
                 </div>
 

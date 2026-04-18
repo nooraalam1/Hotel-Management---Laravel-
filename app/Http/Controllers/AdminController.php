@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
@@ -39,7 +40,8 @@ class AdminController extends Controller
             'image' => ['required', 'mimes:jpg,jpeg,png,svg'],
             'description' => ['nullable'],
             'room_type' => ['required'],
-            'facility' => ['required'],
+            'facility' => ['required','array'],
+            'facility.*'=>['string'],
             'room_number' => ['required'],
             'status' => ['required'],
             'bed_type' => ['required'],
@@ -48,6 +50,7 @@ class AdminController extends Controller
         $data = Hotel::findOrFail($room['hotel_title']);
         $room['hotel_id'] = $data->id;
         $room['location_id'] = $data->location_id;
+        $room['facility'] = json_encode($room['facility']);
         $room['image'] = $request->file('image')->store('rooms', 'public');
         Room::create($room);
         return redirect(route('admin.view_rooms'));
@@ -73,11 +76,12 @@ class AdminController extends Controller
         $room = Room::findOrFail($id);
         $hotels = Hotel::all();
         $facilities = Facility::all();
-        return view('admin.edit', compact('room','hotels','facilities'));
+        return view('admin.rooms.edit', compact('room', 'hotels', 'facilities'));
     }
 
     public function update_room(Request $request, $id)
     {
+
         $room = $request->validate([
             'location_id' => ['nullable'],
             'hotel_id' => ['nullable'],
@@ -85,26 +89,25 @@ class AdminController extends Controller
             'image' => ['nullable', 'mimes:jpg,jpeg,png,svg'],
             'description' => ['nullable'],
             'room_type' => ['required'],
-            'facility' => ['required'],
+            'facility' => ['required','array'],
+            'facility.*'=>['string'],
             'room_number' => ['required'],
             'status' => ['required'],
             'bed_type' => ['required'],
             'price' => ['required'],
         ]);
-
-        $data = Hotel::findOrFail($room['hotel_title']);
+        $data = Room::findOrFail($room['hotel_title']);
         $room['hotel_id'] = $data->id;
         $room['location_id'] = $data->location_id;
 
         if ($request->hasFile('image')) {
-            if ($room->image && public_path('storage/'.$room->image)) {
-                unlink(public_path('storage/'.$room->image));
+            if ($room->image && public_path('storage/' . $room->image)) {
+                unlink(public_path('storage/' . $room->image));
             }
             $room['image'] = $request->file('image')->store('rooms', 'public');
         }
-        dd('hi');
-        $data = Room::findOrFail($id);
-        $data->update($room);
+        $updated = Room::findOrFail($id);
+        $updated->update($room);
         return redirect(route('admin.view_rooms'));
     }
     public function booking(Request $request, Room $room)
@@ -412,7 +415,6 @@ class AdminController extends Controller
 
         $data->update($hotel);
         return redirect()->route('admin.viewHotels')->with('success', 'Hotel Updated Successfully');
-
     }
 
     public function trashedHotels()

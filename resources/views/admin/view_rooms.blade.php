@@ -26,7 +26,7 @@
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
-                @forelse ($rooms as $key=> $room)
+                @forelse ($rooms as $key => $room)
                     <tr class="table_row">
                         <td>{{ $key+1 }}</td>
                         <td>{{ App\Models\Hotel::findOrFail($room->hotel_title)->title }}</td>
@@ -46,7 +46,7 @@
                                 <form action="{{ route('admin.delete_room', ['room' => $room]) }}" method="POST">
                                     @csrf
                                     @method('delete')
-                                    <input class="btn btn-warning" type="submit" value="Delete">
+                                    <input class="btn btn-warning" type="submit" onclick="return confirm('Are You Sure?')" value="Delete">
                                 </form>
                             </div>
                         </td>
