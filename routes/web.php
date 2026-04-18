@@ -10,12 +10,16 @@ Route::middleware(['auth', 'role:admin'])
     ->prefix('admin')
     ->group(function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+        //Rooms
         Route::get('/addRoom', [AdminController::class, 'addRoom'])->name('admin.addRoom');
         Route::post('/add_room', [AdminController::class, 'add_room'])->name('admin.add_room');
         Route::get('/view_rooms', [AdminController::class, 'view_rooms'])->name('admin.view_rooms');
         Route::delete('/delete_room/{room}', [AdminController::class, 'delete'])->name('admin.delete_room');
-        Route::get('/edit/{room}', [AdminController::class, 'edit'])->name('admin.edit');
-        Route::put('/update/{room}', [AdminController::class, 'update_room'])->name('admin.update_room');
+        Route::get('/edit/{id}', [AdminController::class, 'editRoom'])->name('admin.editRoom');
+        Route::put('/update/{id}', [AdminController::class, 'update_room'])->name('admin.update_room');
+        
+        //bookings
         Route::get('/bookings', [AdminController::class, 'bookings'])->name('admin.bookings');
         Route::put('/booking/approve/{id}', [AdminController::class, 'booking_approve'])->name('admin.booking_approve');
         Route::put('/booking/reject/{id}', [AdminController::class, 'booking_reject'])->name('admin.booking_reject');

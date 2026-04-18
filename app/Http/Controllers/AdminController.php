@@ -24,23 +24,32 @@ class AdminController extends Controller
 
     public function addRoom()
     {
-        return view('admin.addRoom');
+        $facilities = Facility::all();
+        $hotels = Hotel::all();
+        return view('admin.addRoom', compact('facilities', 'hotels'));
     }
 
     public function add_room(Request $request)
     {
-        $data = $request->validate([
-            'room_title'  => 'required',
-            'image'       => 'required|mimes:jpg,jpeg,png',
-            'description' => 'nullable',
-            'price'       => 'required',
-            'wifi'        => 'required',
-            'room_type'   => 'required',
+
+        $room = $request->validate([
+            'location_id' => ['nullable'],
+            'hotel_id' => ['nullable'],
+            'hotel_title' => ['required'],
+            'image' => ['required', 'mimes:jpg,jpeg,png,svg'],
+            'description' => ['nullable'],
+            'room_type' => ['required'],
+            'facility' => ['required'],
+            'room_number' => ['required'],
+            'status' => ['required'],
+            'bed_type' => ['required'],
+            'price' => ['required'],
         ]);
-
-        $data['image'] = $request->file('image')->store('rooms', 'public');
-
-        Room::create($data);
+        $data = Hotel::findOrFail($room['hotel_title']);
+        $room['hotel_id'] = $data->id;
+        $room['location_id'] = $data->location_id;
+        $room['image'] = $request->file('image')->store('rooms', 'public');
+        Room::create($room);
         return redirect(route('admin.view_rooms'));
     }
 
@@ -59,43 +68,56 @@ class AdminController extends Controller
         return redirect(route('admin.view_rooms'));
     }
 
-    public function edit(Room $room)
+    public function editRoom($id)
     {
-        return view('admin.edit', compact('room'));
+        $room = Room::findOrFail($id);
+        $hotels = Hotel::all();
+        $facilities = Facility::all();
+        return view('admin.edit', compact('room','hotels','facilities'));
     }
 
-    public function update_room(Request $request, Room $room)
+    public function update_room(Request $request, $id)
     {
-        $data = $request->validate([
-            'room_title'  => 'nullable',
-            'image'       => 'nullable|mimes:jpg,jpeg,png',
-            'description' => 'nullable',
-            'price'       => 'required',
-            'wifi'        => 'required',
-            'room_type'   => 'required',
+        $room = $request->validate([
+            'location_id' => ['nullable'],
+            'hotel_id' => ['nullable'],
+            'hotel_title' => ['required'],
+            'image' => ['nullable', 'mimes:jpg,jpeg,png,svg'],
+            'description' => ['nullable'],
+            'room_type' => ['required'],
+            'facility' => ['required'],
+            'room_number' => ['required'],
+            'status' => ['required'],
+            'bed_type' => ['required'],
+            'price' => ['required'],
         ]);
 
-        if ($request->hasFile('image')) {
-            if ($room->image) {
-                Storage::disk('public')->delete($room->image);
-            }
-            $data['image'] = $request->file('image')->store('rooms', 'public');
-        }
+        $data = Hotel::findOrFail($room['hotel_title']);
+        $room['hotel_id'] = $data->id;
+        $room['location_id'] = $data->location_id;
 
-        $room->update($data);
+        if ($request->hasFile('image')) {
+            if ($room->image && public_path('storage/'.$room->image)) {
+                unlink(public_path('storage/'.$room->image));
+            }
+            $room['image'] = $request->file('image')->store('rooms', 'public');
+        }
+        dd('hi');
+        $data = Room::findOrFail($id);
+        $data->update($room);
         return redirect(route('admin.view_rooms'));
     }
     public function booking(Request $request, Room $room)
     {
         $data = $request->validate([
-            "name"       => "required|string| max: 20",
-            "email"      => "required",
-            "phone"      => "required",
+            "name" => "required|string| max: 20",
+            "email" => "required",
+            "phone" => "required",
             "start_date" => "required|date|after_or_equal:today",
-            "end_date"   => "required|date|after:start_date",
+            "end_date" => "required|date|after:start_date",
         ]);
         $data["room_id"] = $room->id;
-        $exists          = Booking::where('room_id', $room->id)
+        $exists = Booking::where('room_id', $room->id)
             ->where('start_date', '<=', $request->end_date)
             ->where('end_date', '>=', $request->start_date)
             ->exists();
@@ -146,9 +168,9 @@ class AdminController extends Controller
     public function addABlog(Request $request)
     {
         $blog = $request->validate([
-            'image'       => 'required|mimes:jpg,jpeg,png|max:2048',
-            'title'       => 'nullable|max:50',
-            'tagline'     => 'nullable',
+            'image' => 'required|mimes:jpg,jpeg,png|max:2048',
+            'title' => 'nullable|max:50',
+            'tagline' => 'nullable',
             'description' => 'nullable|max:500',
         ]);
         if ($request->hasFile('image')) {
@@ -165,9 +187,9 @@ class AdminController extends Controller
     public function updateBlog(Request $request, Blog $blog)
     {
         $data = $request->validate([
-            'image'       => 'nullable|mimes:jpg,jpeg,png',
-            'title'       => 'nullable|max:50',
-            'tagline'     => 'nullable',
+            'image' => 'nullable|mimes:jpg,jpeg,png',
+            'title' => 'nullable|max:50',
+            'tagline' => 'nullable',
             'description' => 'nullable|max:500',
         ]);
         if ($request->hasFile('image')) {
@@ -208,8 +230,8 @@ class AdminController extends Controller
             "location" => ["required", "string"],
             "district" => ["required", "string"],
             "division" => ["required"],
-            "phone"    => ["required", "string"],
-            "email"    => ["required", "string"],
+            "phone" => ["required", "string"],
+            "email" => ["required", "string"],
         ]);
         Location::create($data);
         return redirect()->route('admin.viewlocations')->with('success', 'Location Added Successfully');
@@ -222,7 +244,7 @@ class AdminController extends Controller
     }
     public function editlocation($id)
     {
-        $location  = Location::findOrFail($id);
+        $location = Location::findOrFail($id);
         $districts = District::all();
         return view('admin.locations.edit', compact('location', 'districts'));
     }
@@ -232,26 +254,29 @@ class AdminController extends Controller
             "location" => ["required", "string"],
             "district" => ["required", "string"],
             "division" => ["required"],
-            "phone"    => ["required", "string"],
-            "email"    => ["required", "string"],
+            "phone" => ["required", "string"],
+            "email" => ["required", "string"],
         ]);
         $location = Location::findOrFail($id);
         $location->update($data);
         return redirect()->route('admin.viewlocations')->with('success', 'Location Updated Successfully');
     }
-    public function trashedLocations(){
+    public function trashedLocations()
+    {
         $locations = Location::onlyTrashed()->get();
-        return view('admin.locations.trash',compact('locations'));
+        return view('admin.locations.trash', compact('locations'));
     }
-    public function restoreLocation($id){
+    public function restoreLocation($id)
+    {
         $data = Location::onlyTrashed()->findOrFail($id);
         $data->restore();
-        return redirect()->route('admin.trashedLocations')->with('success','Restored Successfully');
+        return redirect()->route('admin.trashedLocations')->with('success', 'Restored Successfully');
     }
-    public function permanentDelete($id){
+    public function permanentDelete($id)
+    {
         $data = Location::onlyTrashed()->findOrFail($id);
         $data->forceDelete();
-        return redirect()->route('admin.trashedLocations')->with('success','Permanently Deleted');
+        return redirect()->route('admin.trashedLocations')->with('success', 'Permanently Deleted');
     }
 
     //Facility
@@ -269,7 +294,7 @@ class AdminController extends Controller
     public function createFacility(Request $request)
     {
         $data = $request->validate([
-            'name'  => ['required', 'string'],
+            'name' => ['required', 'string'],
             'image' => ['required', 'mimes:jpg,jpeg,png,svg', 'image'],
         ]);
 
@@ -280,7 +305,7 @@ class AdminController extends Controller
 
     public function deleteFacility($id)
     {
-        $data    = Facility::findOrFail($id);
+        $data = Facility::findOrFail($id);
         $imgPath = public_path(('storage/' . $data->image));
 
         if (file_exists($imgPath)) {
@@ -297,10 +322,10 @@ class AdminController extends Controller
     }
     public function updateFacility(Request $request, $id)
     {
-        $data     = Facility::findOrFail($id);
+        $data = Facility::findOrFail($id);
         $facility = $request->validate([
-            'name'  => ['required', 'string'],
-            'image' => ['nullable','mimes:jpg,jpeg,png,svg', 'image'],
+            'name' => ['required', 'string'],
+            'image' => ['nullable', 'mimes:jpg,jpeg,png,svg', 'image'],
         ]);
         if ($request->hasFile('image')) {
             if ($data->image) {
@@ -333,16 +358,16 @@ class AdminController extends Controller
     {
         $hotel = $request->validate([
             'location_id' => ['required'],
-            'location'    => ['nullable'],
-            'title'       => ['required', 'string'],
-            'image'       => ['required', 'mimes:jpg,png,jpeg,svg'],
-            'phone'       => ['required'],
-            'email'       => ['required'],
-            'status'      => ['required'],
+            'location' => ['nullable'],
+            'title' => ['required', 'string'],
+            'image' => ['required', 'mimes:jpg,png,jpeg,svg'],
+            'phone' => ['required'],
+            'email' => ['required'],
+            'status' => ['required'],
         ]);
-        $location          = Location::findOrFail($hotel['location_id']);
+        $location = Location::findOrFail($hotel['location_id']);
         $hotel['location'] = $location->location;
-        $hotel['image']    = $request->file('image')->store('hotels', 'public');
+        $hotel['image'] = $request->file('image')->store('hotels', 'public');
         Hotel::create($hotel);
 
         return redirect()->route('admin.viewHotels')->with('success', 'Hotel Added Successfully');
@@ -354,14 +379,14 @@ class AdminController extends Controller
     }
     public function deleteHotel($id)
     {
-        $data    = Hotel::findOrFail($id);
+        $data = Hotel::findOrFail($id);
         $data->delete();
         return redirect()->route('admin.viewHotels')->with('success', 'Hotel Deleted Successfully');
     }
     public function editHotel($id)
     {
         $locations = Location::all();
-        $hotel     = Hotel::findOrFail($id);
+        $hotel = Hotel::findOrFail($id);
         return view('admin.hotels.edit', compact('hotel', 'locations'));
     }
     public function updateHotel(Request $request, $id)
@@ -369,24 +394,24 @@ class AdminController extends Controller
         $data = Hotel::findOrFail($id);
         $hotel = $request->validate([
             'location_id' => ['required'],
-            'location'    => ['nullable'],
-            'title'       => ['required', 'string'],
-            'image'       => ['nullable', 'mimes:jpg,png,jpeg,svg'],
-            'phone'       => ['required'],
-            'email'       => ['required'],
-            'status'      => ['required'],
+            'location' => ['nullable'],
+            'title' => ['required', 'string'],
+            'image' => ['nullable', 'mimes:jpg,png,jpeg,svg'],
+            'phone' => ['required'],
+            'email' => ['required'],
+            'status' => ['required'],
         ]);
-        if($request->hasFile('image')){
-            if($data->image && file_exists(public_path('storage/'.$data->image))){
-                unlink(public_path('storage/'.$data->image));
+        if ($request->hasFile('image')) {
+            if ($data->image && file_exists(public_path('storage/' . $data->image))) {
+                unlink(public_path('storage/' . $data->image));
             }
-        $hotel['image'] = $request->file('image')->store('rooms','public');
+            $hotel['image'] = $request->file('image')->store('rooms', 'public');
         }
         $location = Location::findOrFail($hotel['location_id']);
         $hotel['location'] = $location->location;
 
         $data->update($hotel);
-        return redirect()->route('admin.viewHotels')->with('success','Hotel Updated Successfully');
+        return redirect()->route('admin.viewHotels')->with('success', 'Hotel Updated Successfully');
 
     }
 
@@ -395,14 +420,16 @@ class AdminController extends Controller
         $hotels = Hotel::onlyTrashed()->get();
         return view('admin.hotels.trash', compact('hotels'));
     }
-    public function restoreTrashed($id){
+    public function restoreTrashed($id)
+    {
         Hotel::onlyTrashed()->findOrFail($id)->restore();
-        return redirect()->route('admin.trashedHotels')->with('success','Restored Successfully');
+        return redirect()->route('admin.trashedHotels')->with('success', 'Restored Successfully');
     }
-    public function permanentHotelDelete($id){
+    public function permanentHotelDelete($id)
+    {
         $data = Hotel::onlyTrashed()->findOrFail($id);
-        unlink(public_path('storage/'.$data->image));
+        unlink(public_path('storage/' . $data->image));
         $data->forceDelete();
-        return redirect()->route('admin.trashedHotels')->with('success','Permanently Deleted');
+        return redirect()->route('admin.trashedHotels')->with('success', 'Permanently Deleted');
     }
 }

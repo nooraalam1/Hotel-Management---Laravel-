@@ -13,8 +13,14 @@
             <form action="{{ route('admin.add_room') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div>
-                    <label>Room Title</label> </br>
-                    <input type="text" name="room_title" class="form-control is-valid col-md-5" required>
+                    <label>Hotel Title</label> </br>
+                    <select class="form-control" name="hotel_title">
+                    <option>Select</option>
+                    @foreach ($hotels as $hotel)
+                    <option value="{{ $hotel->id }}">{{ $hotel->title }}</option>
+                    @endforeach
+                    </select>
+
                 </div>
                 <div>
                     <label>Description</label> </br>
@@ -33,12 +39,13 @@
                         </div>
                     </div>
                     <div class="col-6 p-0">
-                        <label class=" p-0 form-control-label">Wifi</label>
+                        <label class=" p-0 form-control-label">Facilities</label>
                         <div class="p-0">
-                            <select name="wifi" class="form-control mb-3">
+                            <select name="facility" class="form-control mb-3">
                                 <option>Select</option>
-                                <option value="yes">Yes</option>
-                                <option selected value="no">No</option>
+                                @foreach ($facilities as $facility)
+                                    <option value="{{ $facility->name }}">{{ $facility->name }} </option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -49,7 +56,29 @@
                 </div>
                 <div>
                     <label>Upload Image</label> <br>
-                    <input type="file" name="image" required>
+                    <input type="file" name="image" class="dropify" accept=".jpg,.jpeg,.png,.svg" required>
+                </div>
+                <div>
+                    <label>Room No.</label>
+                    <input type="text" name="room_number" class="form-control">
+                </div>
+                <div>
+                    <label>Bed Type</label>
+                    <select class="form-control" name="bed_type">
+                    <option>Select</option>
+                    <option value="single">Single</option>
+                    <option value="double">Double</option>
+                    <option value="king">King</option>           
+                    </select>
+                </div>
+                <div >
+                    <label >Status</label>
+                    <select class="form-control" name="status">
+                    <option>Select</option>
+                    <option value="available">Available</option>
+                    <option value="booked">Booked</option>
+                    <option value="maintenance">Maintenance</option>           
+                    </select>
                 </div>
 
                 <div class="d-flex justify-content-center">
@@ -59,4 +88,7 @@
             </form>
         </section>
     </div>
+    <script>
+        $('.dropify').dropify();
+    </script>
 @endsection

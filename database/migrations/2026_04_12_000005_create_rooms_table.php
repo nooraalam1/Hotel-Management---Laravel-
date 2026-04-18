@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('location_id')->constrained('locations')->onDelete('cascade');
             $table->foreignId('hotel_id')->constrained('hotels')->onDelete('cascade');
-            $table->string('room_title')->required();
-            $table->string('image')->required();
+            $table->string('room_title');
+            $table->string('image');
             $table->string('description')->nullable();
-            $table->string('price')->required();
+            $table->string('price');
             $table->string('room_type');
             $table->string('facility');
             $table->timestamps();

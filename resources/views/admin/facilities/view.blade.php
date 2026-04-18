@@ -22,16 +22,15 @@
                             <td class="align-middle">{{ $key + 1 }}</td>
                             <td class="align-middle">{{ $facility->name }}</td>
                             <td class="align-middle">
-                                <img src="{{ asset('storage/' . $facility->image) }}" style="background-color: rgb(255, 255, 255)"
-                                    width="70px" height="auto" alt="">
+                                <img src="{{ asset('storage/' . $facility->image) }}" style="background-color: white"
+                                    width="70px" height="auto" alt="{{ $facility->name }}">
                             </td>
 
                             <td class="">
                                 <a href="{{ route('admin.editFacility', ['id' => $facility->id]) }}"
                                     class="btn btn-info col mb-2">Edit</a>
                                 <div>
-                                    <form action="{{ route('admin.deleteFacility', ['id' => $facility->id]) }}"
-                                        method="POST">
+                                    <form action="{{ route('admin.deleteFacility', ['id' => $facility->id]) }}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <input class="btn btn-warning col" type="submit" value="Delete">
@@ -40,9 +39,9 @@
                             </td>
                         </tr>
                     @endforeach
-                @else
+            @else
                     <h4 class="text-danger text-center">No Facility Found</h4>
-            @endif
+                @endif
             </table>
             <div class="d-flex justify-content-center mt-2">{{ $facilities->links() }}</div>
         </div>

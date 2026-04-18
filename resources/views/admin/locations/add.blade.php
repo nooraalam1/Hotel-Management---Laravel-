@@ -5,7 +5,7 @@
     <div class="page-content">
         <div class="page-header">
             <div class="container-fluid d-flex justify-content-between align-items-center">
-                <h2 class="h5 no-margin-bottom">Location | Add Location</h2>
+                <h2 class="h3">Location | Add Location</h2>
                 <a href="{{ route('admin.viewlocations') }}" class="btn btn-info">View Location</a>
             </div>
         </div>
@@ -15,20 +15,22 @@
                 <div class="">
                     <div class="col-6 p-0">
                         <label>District</label>
-                        <select name="district" id="district" class="form-control" required >
+                        <select name="district" id="district" class="form-control" required>
                             <option value="">Select</option>
                             @foreach ($districts as $district)
-                                <option  value="{{ $district->id }}">{{ $district->district_name }}</option>
+                                <option value="{{ $district->id }}">{{ $district->district_name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-6 p-0">
                         <label class="">Division</label>
-                        <input type="text" name="division" class="form-control" id="division" readonly placeholder="Auto Filled">
+                        <input type="text" name="division" class="form-control" id="division" readonly
+                            placeholder="Auto Filled">
                     </div>
                     <div class="col-6 p-0 ">
                         <label>Location</label>
-                        <input type="text" name="location" class="form-control" required placeholder="Road:07, Block:J, Baridhara, Dhaka">
+                        <input type="text" name="location" class="form-control" required
+                            placeholder="Road:07, Block:J, Baridhara, Dhaka">
                     </div>
                     <div class="col-6 p-0">
                         <label>Location Manager Mobile</label>
@@ -45,15 +47,15 @@
             </form>
         </section>
         <script>
-            $(document).ready(function() {
-                $('#district').on('change', function() {
+            $(document).ready(function () {
+                $('#district').on('change', function () {
                     const districtId = $(this).val()
 
                     if (districtId) {
                         $.ajax({
                             url: '/admin/get-district/' + districtId,
                             type: 'get',
-                            success: function(data) {
+                            success: function (data) {
                                 // $('#district').val(data.district_name);
                                 $('#division').val(data.division_name);
                             }

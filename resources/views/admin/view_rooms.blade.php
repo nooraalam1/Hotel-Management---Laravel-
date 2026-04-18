@@ -14,26 +14,34 @@
 
             <table class="table text-center">
                 <tr>
-                    <th>Room Title</th>
+                    <th>SL</th>
+                    <th>Hotel Title</th>
                     <th>Description</th>
                     <th>Price</th>
-                    <th>Wifi</th>
+                    <th>Facility</th>
                     <th>Room Type</th>
+                    <th>Room No</th>
+                    <th>Bed Type</th>
                     <th>Image</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
-                @forelse ($rooms as $room)
+                @forelse ($rooms as $key=> $room)
                     <tr class="table_row">
-                        <td>{{ $room->room_title }}</td>
+                        <td>{{ $key+1 }}</td>
+                        <td>{{ App\Models\Hotel::findOrFail($room->hotel_title)->title }}</td>
                         <td>{{ $room->description }}</td>
                         <td>{{ $room->price }}</td>
-                        <td>{{ $room->wifi }}</td>
+                        <td>{{ $room->facility }}</td>
                         <td>{{ $room->room_type }}</td>
+                        <td>{{ $room->room_number }}</td>
+                        <td>{{ $room->bed_type }}</td>
                         <td>
                             <img src="{{ asset('storage/' . $room->image) }}" width="50" />
                         </td>
+                        <td>{{ $room->status }}</td>
                         <td class="d-flex" style="gap: 10px">
-                            <a href="{{ route('admin.edit', ['room' => $room]) }}" class="btn btn-info">Edit</a>
+                            <a href="{{ route('admin.editRoom', ['id' => $room->id]) }}" class="btn btn-info">Edit</a>
                             <div>
                                 <form action="{{ route('admin.delete_room', ['room' => $room]) }}" method="POST">
                                     @csrf

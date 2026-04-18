@@ -2,13 +2,14 @@
 @section('title', 'View Locations')
 @section('content')
     <div class="page-content">
-        <x-alerts/>
-            <div class="page-header">
-                <div class="container-fluid d-flex justify-content-between align-items-center">
-                    <h2 class="h5 no-margin-bottom">Location | View Locations</h2>
-                    <a href="{{ route('admin.addlocation') }}" class="btn btn-info">Add Location</a>
-                </div>
+        <x-alerts />
+        <div class="page-header">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <h2 class="h3">Location | View Locations</h2>
+                <a href="{{ route('admin.addlocation') }}" class="btn btn-info">Add Location</a>
             </div>
+        </div>
+        @if ($locations->count() > 0)
             <table class="table text-center">
                 <tr>
                     <th>SL</th>
@@ -26,17 +27,21 @@
                         <td>{{ $location->phone }}</td>
                         <td>{{ $location->email }}</td>
                         <td class="d-flex justify-content-center " style="gap: 10px">
-                            <a href="{{route('admin.editlocation',['id'=>$location->id])}}" class="btn btn-info">Edit</a>
+                            <a href="{{route('admin.editlocation', ['id' => $location->id])}}" class="btn btn-info">Edit</a>
                             <div>
-                                <form action="{{route("admin.deletelocation",["id"=>$location->id])}}" method="POST">
+                                <form action="{{route("admin.deletelocation", ["id" => $location->id])}}" method="POST">
                                     @csrf
                                     @method('delete')
-                                    <input class="btn btn-warning" type="submit" value="Delete" onclick="return confirm('Are You Sure?')">
+                                    <input class="btn btn-warning" type="submit" value="Delete"
+                                        onclick="return confirm('Are You Sure?')">
                                 </form>
                             </div>
                         </td>
                     </tr>
                 @endforeach
             </table>
+        @else
+            <h4 class="text-danger text-center">Nothing Found !</h4>
+        @endif
     </div>
 @endsection
