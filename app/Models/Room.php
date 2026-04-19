@@ -24,7 +24,7 @@ class Room extends Model
     public function locations(){
         return $this->belongsTo(Location::class);
     }
-    public function hotels(){
+    public function hotel(){
         return $this->belongsTo(Hotel::class);
     }
 }

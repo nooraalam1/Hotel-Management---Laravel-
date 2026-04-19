@@ -15,12 +15,8 @@
                 @method('put')
                 <div>
                     <label>Hotel Title</label> </br>
-                    <select class="form-control" name="hotel_title">
-                    <option>Select</option>
-                    @foreach ($hotels as $hotel)
-                    <option value="{{ $hotel->id }}">{{ $hotel->title }}</option>
-                    @endforeach
-                    </select>
+                    <input type="text" readonly class="form-control" placeholder="{{$room->hotel->title}}">
+                    <input type="hidden" name="hotel_title" value="{{$room->hotel->id}}">
 
                 </div>
                 <div>

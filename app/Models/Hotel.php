@@ -13,4 +13,7 @@ class Hotel extends Model
     public function location(){
         return $this->belongsTo(Location::class);
     }
+    public function rooms(){
+        return $this->hasMany(Room::class);
+    }
 }

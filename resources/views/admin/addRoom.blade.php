@@ -61,7 +61,7 @@
                 </div>
                 <div>
                     <label>Bed Type</label>
-                    <select class="form-control" name="bed_type">
+                    <select class="form-control" name="bed_type" required>
                     <option>Select</option>
                     <option value="single">Single</option>
                     <option value="double">Double</option>
