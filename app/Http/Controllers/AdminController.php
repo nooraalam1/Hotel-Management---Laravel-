@@ -287,7 +287,7 @@ class AdminController extends Controller
     }
     public function viewfacility()
     {
-        $facilities = Facility::latest()->paginate(5);
+        $facilities = Facility::all();
 
         return view('admin.facilities.view', compact('facilities'));
     }

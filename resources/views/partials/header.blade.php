@@ -8,7 +8,7 @@
                         <div class="center-desk">
                             <div class="logo">
                                 <a href="{{ route('home') }}"><img src="{{ asset('images/brandlogo.png') }}" height="auto"
-                                        width="120px" alt="#" /></a>
+                                        width="120px" alt="brandlogo" /></a>
                             </div>
                         </div>
                     </div>

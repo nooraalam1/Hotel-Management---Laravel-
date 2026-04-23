@@ -53,7 +53,7 @@
                 </div>
                 <div>
                     <label>Upload Image</label> <br>
-                    <input type="file" name="image" class="dropify" accept=".jpg,.jpeg,.png,.svg" required>
+                    <input type="file" name="image" class="dropzone" accept=".jpg,.jpeg,.png,.svg" required>
                 </div>
                 <div>
                     <label>Room No.</label>
@@ -86,6 +86,6 @@
         </section>
     </div>
     <script>
-        $('.dropify').dropify();
-    </script>
+  Dropzone.discover();
+</script>
 @endsection

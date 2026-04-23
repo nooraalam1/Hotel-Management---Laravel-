@@ -22,7 +22,8 @@
                         Location</a></li>
                 <li><a href="{{ route('admin.viewlocations') }}"><i class="fa fa-eye" aria-hidden="true"></i>View
                         Locations</a></li>
-                <li><a href="{{ route('admin.trashedLocations') }}"><i class="fa fa-trash" aria-hidden="true"></i>Deleted Locations</a></li>
+                <li><a href="{{ route('admin.trashedLocations') }}"><i class="fa fa-trash"
+                            aria-hidden="true"></i>Deleted Locations</a></li>
             </ul>
         </li>
         <li>

@@ -19,7 +19,7 @@
                                 <div class="number dashtext-1">{{ auth()->user()->count() }}</div>
                             </div>
                             <div class="progress progress-template">
-                                <div role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0"
+                                <div role="progressbar" style="width: {{ auth()->user()->count()}}%" aria-valuenow="30" aria-valuemin="0"
                                     aria-valuemax="100" class="progress-bar progress-bar-template dashbg-1"></div>
                             </div>
                         </div>

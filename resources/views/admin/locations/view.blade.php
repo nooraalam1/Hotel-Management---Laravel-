@@ -10,7 +10,8 @@
             </div>
         </div>
         @if ($locations->count() > 0)
-            <table class="table text-center">
+            <table class="table text-center" id="locations">
+                <thead>
                 <tr>
                     <th>SL</th>
                     <th>Location</th>
@@ -19,6 +20,8 @@
                     <th>Manager Email</th>
                     <th>Action</th>
                 </tr>
+                </thead>
+                <tbody>
                 @foreach ($locations as $key => $location)
                     <tr>
                         <td>{{ $key + 1 }}</td>
@@ -39,9 +42,17 @@
                         </td>
                     </tr>
                 @endforeach
+                @else
+                    <h4 class="text-danger text-center">Nothing Found !</h4>
+                    @endif
+                </tbody>
             </table>
-        @else
-            <h4 class="text-danger text-center">Nothing Found !</h4>
-        @endif
     </div>
+    <script>
+        $(document).ready(function(){
+            new DataTable("#locations",{
+                responsive:true,
+            });
+        })
+    </script>
 @endsection
