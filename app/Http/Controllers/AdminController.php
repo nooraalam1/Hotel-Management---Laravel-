@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\District;
 use App\Models\Division;
 use App\Models\Facility;
+use App\Models\Hero;
 use App\Models\Hotel;
 use App\Models\Location;
 use App\Models\Room;
@@ -149,9 +150,33 @@ class AdminController extends Controller
         ]);
         return redirect(route('admin.bookings'));
     }
-    public function banner()
+    public function hero()
     {
-        return view('admin.banner');
+        return view('admin.hero.index');
+    }
+    public function addHero(Request $request){
+        $data = $request->validate([
+            'image' => ['required','mimes: jpg,jpeg,png,svg','image'],
+        ]);
+        if($request->hasFile('image')){
+            $data['image'] = $request->file('image')->store('hero','public');
+        }
+        Hero::create($data);
+
+        return redirect()->route('admin.viewHero')->with('success','Image Added Successfully');
+    }
+    public function viewHero(){
+        $heros = Hero::paginate(5);
+        return view('admin.hero.view',compact('heros'));
+    }
+    public function heroDelete($id){
+        $data = Hero::findOrFail($id);
+        $imgPath = public_path('storage/'.$data->image);
+        if(file_exists($imgPath)){
+            unlink($imgPath);
+        }
+        $data->delete();
+        return redirect()->route('admin.viewHero')->with('success','Deleted Successfully!');
     }
     public function gallery()
     {

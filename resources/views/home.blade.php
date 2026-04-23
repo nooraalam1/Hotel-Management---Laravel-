@@ -5,27 +5,35 @@
 
     <section class="banner_main">
         <div id="myCarousel" class="carousel slide banner" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="first-slide" src="{{ asset('images/banner1.jpg') }}" width="100%" alt="First slide">
-                    <div class="container">
-                    </div>
-                </div>
+
+    {{-- Indicators --}}
+    <ol class="carousel-indicators">
+        @foreach ($heros as $key => $hero)
+            <li data-target="#myCarousel" data-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : '' }}"></li>
+        @endforeach
+    </ol>
+
+    {{-- Slides --}}
+    <div class="carousel-inner">
+        @foreach ($heros as $key => $hero)
+            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                <img src="{{ asset('storage/'.$hero->image) }}" 
+                     class="d-block w-100 h-70" 
+                     alt="hero_img">
             </div>
-            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
+        @endforeach
+    </div>
+
+    {{-- Controls --}}
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+
+</div>
         <div class="booking_ocline">
             <div class="container">
                <div class="row">

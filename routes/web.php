@@ -24,8 +24,12 @@ Route::middleware(['auth', 'role:admin'])
         Route::put('/booking/approve/{id}', [AdminController::class, 'booking_approve'])->name('admin.booking_approve');
         Route::put('/booking/reject/{id}', [AdminController::class, 'booking_reject'])->name('admin.booking_reject');
 
-        //banner route
-        Route::get('/banner', [AdminController::class, 'banner'])->name('admin.banner');
+        //Hero 
+        Route::get('/hero', [AdminController::class, 'hero'])->name('admin.hero.index');
+        Route::post('/hero/add',[AdminController::class,'addHero'])->name('admin.addHero');
+        Route::get('/hero/view',[AdminController::class,'viewHero'])->name('admin.viewHero');
+        Route::delete('/hero/delete/{id}',[AdminController::class,'heroDelete'])->name('admin.heroDelete');
+
         //gallery route
         Route::get('/gallery', [AdminController::class, 'gallery'])->name('admin.gallery');
 

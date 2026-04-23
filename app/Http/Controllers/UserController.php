@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Facility;
+use App\Models\Hero;
 use App\Models\Location;
 use App\Models\Room;
 use Illuminate\Http\Request;
@@ -15,7 +16,8 @@ class UserController extends Controller
     }
 
     public function home(){
-        return view('home');
+        $heros = Hero::all();
+        return view('home',compact('heros'));
     }
 
     public function about(){

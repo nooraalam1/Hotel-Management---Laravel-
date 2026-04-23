@@ -17,7 +17,7 @@
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <a href="{{ route('logout') }}" class="btn btn-danger">Logout</a>
+                        <input type="submit" value="Logout" class="btn btn-danger">
                     </form>
                 </div>
             </div>

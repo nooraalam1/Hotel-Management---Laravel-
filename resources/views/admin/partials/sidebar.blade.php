@@ -70,8 +70,8 @@
         <li><a href="#img" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-picture-o"
                     aria-hidden="true"></i>Image Management</a>
             <ul id="img" class="collapse list-unstyled ">
-                <li><a href="{{ route('admin.banner') }}"><i class="fa fa-file-image-o"
-                            aria-hidden="true"></i>Banner</a></li>
+                <li><a href="{{ route('admin.hero.index') }}"><i class="fa fa-file-image-o"
+                            aria-hidden="true"></i>Hero</a></li>
                 <li><a href="{{ route('admin.gallery') }}"><i class="fa fa-file-image-o"
                             aria-hidden="true"></i>Gallery</a></li>
             </ul>
