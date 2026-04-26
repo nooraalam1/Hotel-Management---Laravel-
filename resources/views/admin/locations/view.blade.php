@@ -48,11 +48,5 @@
                 </tbody>
             </table>
     </div>
-    <script>
-        $(document).ready(function(){
-            new DataTable("#locations",{
-                responsive:true,
-            });
-        })
-    </script>
+
 @endsection

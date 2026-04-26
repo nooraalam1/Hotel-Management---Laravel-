@@ -30,9 +30,6 @@ Route::middleware(['auth', 'role:admin'])
         Route::get('/hero/view',[AdminController::class,'viewHero'])->name('admin.viewHero');
         Route::delete('/hero/delete/{id}',[AdminController::class,'heroDelete'])->name('admin.heroDelete');
 
-        //gallery route
-        Route::get('/gallery', [AdminController::class, 'gallery'])->name('admin.gallery');
-
         //locations
         Route::get('/addlocation',[AdminController::class,'addlocation'])->name('admin.addlocation');
         Route::get('/viewlocations',[AdminController::class,'viewlocations'])->name('admin.viewlocations');

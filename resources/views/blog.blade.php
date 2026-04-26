@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="row">
-                @forelse($blogs as $blog)
+                @foreach($blogs as $blog)
                     <div class="col-md-4">
                         <div class="blog_box">
                             <div class="blog_img">
@@ -26,13 +26,7 @@
                             </div>
                         </div>
                     </div>
-                @empty
-<<<<<<< HEAD
-                    <h4 class="text-muted">No Data Found</h4>
-=======
-                <h4 class="d-flex justify-content-center">No Data Found</h4>
->>>>>>> 5cf775b511adcd2423fcfeaa9f898b96f1587fdb
-                @endforelse
+                @endforeach
             </div>
         </div>
     </div>

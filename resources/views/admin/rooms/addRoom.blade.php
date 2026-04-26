@@ -3,6 +3,7 @@
 @section('content')
 
     <div class="page-content">
+        <x-alerts></x-alerts>
         <div class="page-header">
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <h2 class="h5 no-margin-bottom">Room / Add Room</h2>

@@ -11,6 +11,7 @@
             </div>
         </div>
         <section class="no-padding-top no-padding-bottom">
+            @if($blogs->count()>0)
             <table class="table text-center">
                 <tr>
                     <th>Title</th>
@@ -42,6 +43,9 @@
                     <h4 class="d-flex justify-content-center">No Data Found</h4>
                 @endforelse
             </table>
+            @else
+                <h3 class="text-center text-danger">Nothing Found!</h3>
+            @endif
         </section>
     </div>
 @endsection

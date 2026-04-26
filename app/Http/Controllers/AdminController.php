@@ -13,7 +13,7 @@ use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Storage;
-
+use DB;
 Paginator::useBootstrap();
 
 class AdminController extends Controller
@@ -27,39 +27,45 @@ class AdminController extends Controller
     {
         $facilities = Facility::all();
         $hotels     = Hotel::all();
-        return view('admin.addRoom', compact('facilities', 'hotels'));
+        return view('admin.rooms.addRoom', compact('facilities', 'hotels'));
     }
 
     public function add_room(Request $request)
     {
-
-        $room = $request->validate([
-            'location_id' => ['nullable'],
-            'hotel_id'    => ['nullable'],
-            'hotel_title' => ['required'],
-            'image'       => ['required', 'mimes:jpg,jpeg,png,svg'],
-            'description' => ['nullable'],
-            'room_type'   => ['required'],
-            'facility'    => ['required', 'array'],
-            'facility.*'  => ['string'],
-            'room_number' => ['required'],
-            'status'      => ['required'],
-            'bed_type'    => ['required'],
-            'price'       => ['required'],
-        ]);
-        $data                = Hotel::findOrFail($room['hotel_title']);
-        $room['hotel_id']    = $data->id;
-        $room['location_id'] = $data->location_id;
-        $room['facility']    = json_encode($room['facility']);
-        $room['image']       = $request->file('image')->store('rooms', 'public');
-        Room::create($room);
-        return redirect(route('admin.view_rooms'));
+        DB::beginTransaction();
+        try{
+            $room = $request->validate([
+                'location_id' => ['nullable'],
+                'hotel_id'    => ['nullable'],
+                'hotel_title' => ['required'],
+                'image'       => ['required', 'mimes:jpg,jpeg,png,svg'],
+                'description' => ['nullable'],
+                'room_type'   => ['required'],
+                'facility'    => ['required', 'array'],
+                'facility.*'  => ['string'],
+                'room_number' => ['required'],
+                'status'      => ['required'],
+                'bed_type'    => ['required'],
+                'price'       => ['required'],
+            ]);
+            $data                = Hotel::findOrFail($room['hotel_title']);
+            $room['hotel_id']    = $data->id;
+            $room['location_id'] = $data->location_id;
+            $room['facility']    = json_encode($room['facility']);
+            $room['image']       = $request->file('image')->store('rooms', 'public');
+            Room::create($room);
+            return redirect()->route('admin.view_rooms');
+        }
+        catch(\Exception $e){
+           DB::rollBack(); 
+           return back()->with('error',$e->getMessage());
+        }
     }
 
     public function view_rooms()
     {
         $rooms = Room::latest()->paginate(10);
-        return view('admin.view_rooms', compact('rooms'));
+        return view('admin.rooms.view_rooms', compact('rooms'));
     }
     public function delete(Room $room)
     {
@@ -68,7 +74,7 @@ class AdminController extends Controller
             unlink($imgPath);
         }
         $room->delete();
-        return redirect(route('admin.view_rooms'));
+        return redirect()->route('admin.rooms.view_rooms');
     }
 
     public function editRoom($id)
@@ -107,7 +113,7 @@ class AdminController extends Controller
         }
         $currentRoom->update($room);
 
-        return redirect()->route('admin.view_rooms')->with('success','Updated Successfully');
+        return redirect()->route('admin.rooms.view_rooms')->with('success','Updated Successfully');
     }
     public function booking(Request $request, Room $room)
     {
@@ -178,18 +184,14 @@ class AdminController extends Controller
         $data->delete();
         return redirect()->route('admin.viewHero')->with('success','Deleted Successfully!');
     }
-    public function gallery()
-    {
-        return view('admin.gallery');
-    }
     public function addblog()
     {
-        return view('admin.addblog');
+        return view('admin.blogs.addblog');
     }
     public function viewblog()
     {
         $blogs = Blog::all();
-        return view('admin.viewblog', compact('blogs'));
+        return view('admin.blogs.viewblog', compact('blogs'));
     }
     public function addABlog(Request $request)
     {
@@ -203,12 +205,12 @@ class AdminController extends Controller
             $blog['image'] = $request->file('image')->store('blogs', 'public');
         }
         Blog::create($blog);
-        return redirect()->route('admin.viewblog')->with('success', 'Blog Added Successfully');
+        return redirect()->route('admin.blogs.viewblog')->with('success', 'Blog Added Successfully');
     }
 
     public function editBlog(Blog $blog)
     {
-        return view('admin.editblog', compact('blog'));
+        return view('admin.blogs.editblog', compact('blog'));
     }
     public function updateBlog(Request $request, Blog $blog)
     {
@@ -225,7 +227,7 @@ class AdminController extends Controller
             $data['image'] = $request->file('image')->store('blogs', 'public');
         }
         $blog->update($data);
-        return redirect()->route('admin.viewblog')->with('success', 'Blog Updated Successfully');
+        return redirect()->route('admin.blogs.viewblog')->with('success', 'Blog Updated Successfully');
     }
 
     public function deleteBlog(Blog $blog)
@@ -235,7 +237,7 @@ class AdminController extends Controller
             unlink($imgPath);
         }
         $blog->delete();
-        return redirect()->route('admin.viewblog')->with('success', 'Deleted Successfully');
+        return redirect()->route('admin.blogs.viewblog')->with('success', 'Deleted Successfully');
     }
 
     //Location

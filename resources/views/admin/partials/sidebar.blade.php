@@ -72,8 +72,6 @@
             <ul id="img" class="collapse list-unstyled ">
                 <li><a href="{{ route('admin.hero.index') }}"><i class="fa fa-file-image-o"
                             aria-hidden="true"></i>Hero</a></li>
-                <li><a href="{{ route('admin.gallery') }}"><i class="fa fa-file-image-o"
-                            aria-hidden="true"></i>Gallery</a></li>
             </ul>
         </li>
         <li><a href="#blog" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-book"
@@ -85,6 +83,12 @@
                         Blog</a>
                 </li>
             </ul>
+        </li>
+        <li>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <input type="submit" value="Logout" >
+            </form>
         </li>
     </ul>
 </nav>

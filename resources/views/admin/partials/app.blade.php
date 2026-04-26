@@ -31,7 +31,6 @@
     <div class="d-flex align-items-stretch">
         @include('admin.partials.sidebar')
         @yield('content')
-        @include('admin.partials.footer')
     </div>
 
     <script src="{{ asset(' admin/vendor/jquery/jquery.min.js') }}"></script>

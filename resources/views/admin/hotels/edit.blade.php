@@ -46,8 +46,8 @@
                     <label>Status</label>
                     <select name="status" class="form-control" required>
                         <option>Select</option>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
+                        <option value="active" {{ $hotel->status =="active" ? 'selected' :'' }}>Active</option>
+                        <option value="inactive" {{ $hotel->status =="inactive" ? 'selected' :'' }}>Inactive</option>
                     </select>
                 </div>
                 <input type="submit" value="Update Hotel" class="btn btn-primary mt-4">

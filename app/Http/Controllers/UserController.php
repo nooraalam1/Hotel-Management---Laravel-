@@ -31,7 +31,8 @@ class UserController extends Controller
     }
 
     public function gallery(){
-        return view('gallery');
+        $images = Room::all();
+        return view('gallery',compact('images'));
     }
 
     public function blog(){
