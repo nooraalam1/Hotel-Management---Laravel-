@@ -12,14 +12,12 @@
 
         <table class="table text-center">
             <tr>
-                <th>SL</th>
                 <th>Image</th>
             </tr>
             @foreach ($heros as $key=> $hero)
             <tr class="table-row">
-                <td class="align-middle">{{ $heros->firstItem()+$key }}</td>
                 <td class="">
-                    <img src="{{ asset('storage/'.$hero->image )}}" width="200px" alt="hero_img">
+                    <img src="{{ asset('storage/'.$hero->image )}}" width="500px" alt="hero_img">
                     <div class="d-flex justify-content-center align-items-center mt-2" style="gap:10px;">
                         <form action="{{ route('admin.heroDelete',['id'=>$hero->id]) }}" method="POST">
                             @csrf

@@ -11,9 +11,11 @@
                 </div>
 
                 <div class="flex justify-center items-center gap-2">
+                    @if (Auth::user()->user_type == 'user')
                     <div>
                         <a href="{{route('profile.edit')}}" class="btn btn-primary">Profile</a>
                     </div>
+                    @endif
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

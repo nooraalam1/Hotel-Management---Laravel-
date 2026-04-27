@@ -32,8 +32,8 @@ class AdminController extends Controller
 
     public function add_room(Request $request)
     {
-        DB::beginTransaction();
         try{
+        DB::beginTransaction();
             $room = $request->validate([
                 'location_id' => ['nullable'],
                 'hotel_id'    => ['nullable'],
@@ -54,6 +54,7 @@ class AdminController extends Controller
             $room['facility']    = json_encode($room['facility']);
             $room['image']       = $request->file('image')->store('rooms', 'public');
             Room::create($room);
+            DB::commit();
             return redirect()->route('admin.view_rooms');
         }
         catch(\Exception $e){
@@ -69,12 +70,20 @@ class AdminController extends Controller
     }
     public function delete(Room $room)
     {
-        $imgPath = public_path('storage/' . $room->image);
-        if (file_exists($imgPath)) {
-            unlink($imgPath);
+        try{
+            DB::beginTransaction();
+            $imgPath = public_path('storage/' . $room->image);
+            if (file_exists($imgPath)) {
+                unlink($imgPath);
+            }
+            $room->delete();
+            DB::commit();
+            return redirect()->route('admin.rooms.view_rooms');
         }
-        $room->delete();
-        return redirect()->route('admin.rooms.view_rooms');
+        catch(\Exception $e){
+            DB::rollBack();
+            return back()->with('error',$e->getMessage());
+        }
     }
 
     public function editRoom($id)
@@ -85,6 +94,9 @@ class AdminController extends Controller
     }
     public function update_room(Request $request, $id)
     {
+        try{
+            DB::beginTransaction();
+       
         $currentRoom = Room::findOrFail($id);
         $room = $request->validate([
             // 'location_id'=> ['nullable'],
@@ -112,8 +124,13 @@ class AdminController extends Controller
         $room['image'] = $request->file('image')->store('rooms','public');
         }
         $currentRoom->update($room);
-
+        DB::commit();
         return redirect()->route('admin.rooms.view_rooms')->with('success','Updated Successfully');
+         }
+         catch(\Exception $e){
+            DB::rollBack();
+            return back()->with('error',$e->getMessage());
+         }
     }
     public function booking(Request $request, Room $room)
     {
@@ -161,6 +178,9 @@ class AdminController extends Controller
         return view('admin.hero.index');
     }
     public function addHero(Request $request){
+        try{
+            DB::beginTransaction();
+        
         $data = $request->validate([
             'image' => ['required','mimes: jpg,jpeg,png,svg','image'],
         ]);
@@ -168,21 +188,33 @@ class AdminController extends Controller
             $data['image'] = $request->file('image')->store('hero','public');
         }
         Hero::create($data);
-
+        DB::commit();
         return redirect()->route('admin.viewHero')->with('success','Image Added Successfully');
+        }
+        catch(\Exception $e){
+            return back()->with('error',$e->getMessage());
+        }
     }
     public function viewHero(){
         $heros = Hero::paginate(5);
         return view('admin.hero.view',compact('heros'));
     }
     public function heroDelete($id){
-        $data = Hero::findOrFail($id);
-        $imgPath = public_path('storage/'.$data->image);
-        if(file_exists($imgPath)){
-            unlink($imgPath);
+        try{
+            DB::beginTransaction();
+            $data = Hero::findOrFail($id);
+            $imgPath = public_path('storage/'.$data->image);
+            if(file_exists($imgPath)){
+                unlink($imgPath);
+            }
+            $data->delete();
+            DB::commit();
+            return redirect()->route('admin.viewHero')->with('success','Deleted Successfully!');
         }
-        $data->delete();
-        return redirect()->route('admin.viewHero')->with('success','Deleted Successfully!');
+        catch(\Exception $e){
+            DB::rollBack();
+            return back()->with('error',$e->getMessage());
+        }
     }
     public function addblog()
     {
@@ -195,17 +227,25 @@ class AdminController extends Controller
     }
     public function addABlog(Request $request)
     {
-        $blog = $request->validate([
-            'image'       => 'required|mimes:jpg,jpeg,png|max:2048',
-            'title'       => 'nullable|max:50',
-            'tagline'     => 'nullable',
-            'description' => 'nullable|max:500',
-        ]);
-        if ($request->hasFile('image')) {
-            $blog['image'] = $request->file('image')->store('blogs', 'public');
+        try{
+            DB::beginTransaction();
+            $blog = $request->validate([
+                'image'       => 'required|mimes:jpg,jpeg,png|max:2048',
+                'title'       => 'nullable|max:50',
+                'tagline'     => 'nullable',
+                'description' => 'nullable|max:500',
+            ]);
+            if ($request->hasFile('image')) {
+                $blog['image'] = $request->file('image')->store('blogs', 'public');
+            }
+            Blog::create($blog);
+            DB::commit();
+            return redirect()->route('admin.blogs.viewblog')->with('success', 'Blog Added Successfully');
         }
-        Blog::create($blog);
-        return redirect()->route('admin.blogs.viewblog')->with('success', 'Blog Added Successfully');
+        catch(\Exception $e){
+            DB::rollback();
+            return back()->with('error',$e->getMessage());
+        }
     }
 
     public function editBlog(Blog $blog)
@@ -214,30 +254,46 @@ class AdminController extends Controller
     }
     public function updateBlog(Request $request, Blog $blog)
     {
-        $data = $request->validate([
-            'image'       => 'nullable|mimes:jpg,jpeg,png',
-            'title'       => 'nullable|max:50',
-            'tagline'     => 'nullable',
-            'description' => 'nullable|max:500',
-        ]);
-        if ($request->hasFile('image')) {
-            if ($blog->image) {
-                Storage::disk('public')->delete($blog->image);
+        try{
+            DB::beginTransaction();
+            $data = $request->validate([
+                'image'       => 'nullable|mimes:jpg,jpeg,png',
+                'title'       => 'nullable|max:50',
+                'tagline'     => 'nullable',
+                'description' => 'nullable|max:500',
+            ]);
+            if ($request->hasFile('image')) {
+                if ($blog->image) {
+                    Storage::disk('public')->delete($blog->image);
+                }
+                $data['image'] = $request->file('image')->store('blogs', 'public');
             }
-            $data['image'] = $request->file('image')->store('blogs', 'public');
+            $blog->update($data);
+            DB::commit();
+            return redirect()->route('admin.blogs.viewblog')->with('success', 'Blog Updated Successfully');
         }
-        $blog->update($data);
-        return redirect()->route('admin.blogs.viewblog')->with('success', 'Blog Updated Successfully');
+        catch(\Exception $e){
+            DB::rollBack();
+            return back()->with('error',$e->getMessage());
+        }
     }
 
     public function deleteBlog(Blog $blog)
     {
-        $imgPath = public_path('storage/' . $blog->image);
-        if (file_exists($imgPath)) {
-            unlink($imgPath);
+        try{
+            DB::beginTransaction();
+            $imgPath = public_path('storage/' . $blog->image);
+            if (file_exists($imgPath)) {
+                unlink($imgPath);
+            }
+            $blog->delete();
+            DB::commit();
+            return redirect()->route('admin.blogs.viewblog')->with('success', 'Deleted Successfully');
         }
-        $blog->delete();
-        return redirect()->route('admin.blogs.viewblog')->with('success', 'Deleted Successfully');
+        catch(\Exception $e){
+            DB::rollBack();
+            return back()->with('error',$e->getMessage());
+        }
     }
 
     //Location
@@ -254,21 +310,38 @@ class AdminController extends Controller
     }
     public function createlocation(Request $request)
     {
-        $data = $request->validate([
-            "location" => ["required", "string"],
-            "district" => ["required", "string"],
-            "division" => ["required"],
-            "phone"    => ["required", "string"],
-            "email"    => ["required", "string"],
-        ]);
-        Location::create($data);
-        return redirect()->route('admin.viewlocations')->with('success', 'Location Added Successfully');
+        try{
+
+            DB::beginTransaction();
+            $data = $request->validate([
+                "location" => ["required", "string"],
+                "district" => ["required", "string"],
+                "division" => ["required"],
+                "phone"    => ["required", "string"],
+                "email"    => ["required", "string"],
+            ]);
+            Location::create($data);
+            DB::commit();
+            return redirect()->route('admin.viewlocations')->with('success', 'Location Added Successfully');
+        }
+        catch(\Exception $e){
+            DB::rollBack();
+            return back()->with('error',$e->getMessage());
+        }
     }
     public function deletelocation($id)
     {
-        $data = Location::findOrFail($id);
-        $data->delete();
-        return redirect()->route('admin.viewlocations')->with('success', 'Location Deleted Successfully');
+        try{
+            DB::beginTransaction();
+            $data = Location::findOrFail($id);
+            $data->delete();
+            DB::commit();
+            return redirect()->route('admin.viewlocations')->with('success', 'Location Deleted Successfully');
+        }
+        catch(\Exception $e){
+            DB::rollBack();
+            return back()->with('error',$e->getMessage());
+        }
     }
     public function editlocation($id)
     {
@@ -278,16 +351,24 @@ class AdminController extends Controller
     }
     public function updatelocation(Request $request, $id)
     {
-        $data = $request->validate([
-            "location" => ["required", "string"],
-            "district" => ["required", "string"],
-            "division" => ["required"],
-            "phone"    => ["required", "string"],
-            "email"    => ["required", "string"],
-        ]);
-        $location = Location::findOrFail($id);
-        $location->update($data);
-        return redirect()->route('admin.viewlocations')->with('success', 'Location Updated Successfully');
+        try{
+            DB::beginTransaction();
+            $data = $request->validate([
+                "location" => ["required", "string"],
+                "district" => ["required", "string"],
+                "division" => ["required"],
+                "phone"    => ["required", "string"],
+                "email"    => ["required", "string"],
+            ]);
+            $location = Location::findOrFail($id);
+            $location->update($data);
+            DB::commit();
+            return redirect()->route('admin.viewlocations')->with('success', 'Location Updated Successfully');
+        }
+        catch(\Exception $e){
+            DB::rollBack();
+            return back()->with('error',$e->getMessage());
+        }
     }
     public function trashedLocations()
     {
@@ -296,15 +377,35 @@ class AdminController extends Controller
     }
     public function restoreLocation($id)
     {
-        $data = Location::onlyTrashed()->findOrFail($id);
-        $data->restore();
-        return redirect()->route('admin.trashedLocations')->with('success', 'Restored Successfully');
+        try{
+            DB::beginTransaction(){
+
+            }
+            $data = Location::onlyTrashed()->findOrFail($id);
+            $data->restore();
+            DB::commit();
+            return redirect()->route('admin.trashedLocations')->with('success', 'Restored Successfully');
+        }
+        catch(\Exception $e){
+            DB::rollBack();
+            return back()->with('error',$e->getMessage());
+        }
     }
     public function permanentDelete($id)
     {
-        $data = Location::onlyTrashed()->findOrFail($id);
-        $data->forceDelete();
-        return redirect()->route('admin.trashedLocations')->with('success', 'Permanently Deleted');
+        try{
+            DB::beginTransaction(){
+
+            }
+            $data = Location::onlyTrashed()->findOrFail($id);
+            $data->forceDelete();
+            DB::commit();
+            return redirect()->route('admin.trashedLocations')->with('success', 'Permanently Deleted');
+        }
+        catch(\Exception $e){
+            DB::rollBack();
+            return back()->with('error',$e->getMessage());
+        }
     }
 
     //Facility
