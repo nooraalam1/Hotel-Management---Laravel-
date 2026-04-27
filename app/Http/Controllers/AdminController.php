@@ -378,9 +378,8 @@ class AdminController extends Controller
     public function restoreLocation($id)
     {
         try{
-            DB::beginTransaction(){
+            DB::beginTransaction();
 
-            }
             $data = Location::onlyTrashed()->findOrFail($id);
             $data->restore();
             DB::commit();
@@ -394,9 +393,7 @@ class AdminController extends Controller
     public function permanentDelete($id)
     {
         try{
-            DB::beginTransaction(){
-
-            }
+            DB::beginTransaction();
             $data = Location::onlyTrashed()->findOrFail($id);
             $data->forceDelete();
             DB::commit();
@@ -422,26 +419,42 @@ class AdminController extends Controller
 
     public function createFacility(Request $request)
     {
-        $data = $request->validate([
-            'name'  => ['required', 'string'],
-            'image' => ['required', 'mimes:jpg,jpeg,png,svg', 'image'],
-        ]);
-
-        $data['image'] = $request->file('image')->store('facility', 'public');
-        Facility::create($data);
-        return redirect()->route('admin.viewfacility')->with('success', 'Facility Added Successfully');
+        try{
+            DB::beginTransaction();
+            $data = $request->validate([
+                'name'  => ['required', 'string'],
+                'image' => ['required', 'mimes:jpg,jpeg,png,svg', 'image'],
+            ]);
+            
+            $data['image'] = $request->file('image')->store('facility', 'public');
+            Facility::create($data);
+            DB::commit();
+            return redirect()->route('admin.viewfacility')->with('success', 'Facility Added Successfully');
+        }
+        catch(\Exception $e){
+            DB::rollBack();
+            return back()->with('error',$e->getMessage());
+        }
     }
 
     public function deleteFacility($id)
     {
-        $data    = Facility::findOrFail($id);
-        $imgPath = public_path(('storage/' . $data->image));
-
-        if (file_exists($imgPath)) {
-            unlink($imgPath);
+        try{
+            DB::beginTransaction();
+            $data    = Facility::findOrFail($id);
+            $imgPath = public_path(('storage/' . $data->image));
+            
+            if (file_exists($imgPath)) {
+                unlink($imgPath);
+            }
+            $data->delete();
+            DB::commit();
+            return redirect()->route('admin.viewfacility')->with('success', 'Facility Deleted Successfully');
         }
-        $data->delete();
-        return redirect()->route('admin.viewfacility')->with('success', 'Facility Deleted Successfully');
+        catch(\Exception $e){
+            DB::rollBack();
+            return back()->with('error',$e->getMessage());
+        }
     }
 
     public function editFacility($id)
@@ -451,8 +464,10 @@ class AdminController extends Controller
     }
     public function updateFacility(Request $request, $id)
     {
-        $data     = Facility::findOrFail($id);
-        $facility = $request->validate([
+        try{
+            DB::beginTransaction();
+            $data     = Facility::findOrFail($id);
+            $facility = $request->validate([
             'name'  => ['required', 'string'],
             'image' => ['nullable', 'mimes:jpg,jpeg,png,svg', 'image'],
         ]);
@@ -462,9 +477,15 @@ class AdminController extends Controller
             }
             $facility['image'] = $request->file('image')->store('facility', 'public');
         }
-
+        
         $data->update($facility);
+        DB::commit();
         return redirect()->route('admin.viewfacility')->with('success', 'Facility Updated');
+    }
+    catch(\Exception $e){
+            DB::rollBack();
+            return back()->with('error',$e->getMessage());
+        }
     }
     public function getDistrict($id)
     {
@@ -485,21 +506,28 @@ class AdminController extends Controller
 
     public function createHotel(Request $request)
     {
-        $hotel = $request->validate([
-            'location_id' => ['required'],
-            'location'    => ['nullable'],
-            'title'       => ['required', 'string'],
-            'image'       => ['required', 'mimes:jpg,png,jpeg,svg'],
-            'phone'       => ['required'],
-            'email'       => ['required'],
-            'status'      => ['required'],
-        ]);
-        $location          = Location::findOrFail($hotel['location_id']);
-        $hotel['location'] = $location->location;
-        $hotel['image']    = $request->file('image')->store('hotels', 'public');
-        Hotel::create($hotel);
-
-        return redirect()->route('admin.viewHotels')->with('success', 'Hotel Added Successfully');
+        try{
+            DB::beginTransaction();
+            $hotel = $request->validate([
+                'location_id' => ['required'],
+                'location'    => ['nullable'],
+                'title'       => ['required', 'string'],
+                'image'       => ['required', 'mimes:jpg,png,jpeg,svg'],
+                'phone'       => ['required'],
+                'email'       => ['required'],
+                'status'      => ['required'],
+            ]);
+            $location          = Location::findOrFail($hotel['location_id']);
+            $hotel['location'] = $location->location;
+            $hotel['image']    = $request->file('image')->store('hotels', 'public');
+            Hotel::create($hotel);
+            DB::commit();   
+            return redirect()->route('admin.viewHotels')->with('success', 'Hotel Added Successfully');
+        }
+        catch(\Exception $e){
+            DB::rollBack();
+            return back()->with('error',$e->getMessage());
+        }
     }
     public function viewHotels()
     {
@@ -508,9 +536,17 @@ class AdminController extends Controller
     }
     public function deleteHotel($id)
     {
-        $data = Hotel::findOrFail($id);
-        $data->delete();
-        return redirect()->route('admin.viewHotels')->with('success', 'Hotel Deleted Successfully');
+        try{
+            DB::beginTransaction();
+            $data = Hotel::findOrFail($id);
+            $data->delete();
+            DB::commit();
+            return redirect()->route('admin.viewHotels')->with('success', 'Hotel Deleted Successfully');
+        }
+        catch(\Exception $e){
+            DB::rollBack();
+            return back()->with('error',$e->getMessage());
+        }
     }
     public function editHotel($id)
     {
@@ -520,9 +556,11 @@ class AdminController extends Controller
     }
     public function updateHotel(Request $request, $id)
     {
-        $data  = Hotel::findOrFail($id);
-        $hotel = $request->validate([
-            'location_id' => ['required'],
+        try{
+            DB::beginTransaction();
+            $data  = Hotel::findOrFail($id);
+            $hotel = $request->validate([
+                'location_id' => ['required'],
             'location'    => ['nullable'],
             'title'       => ['required', 'string'],
             'image'       => ['nullable', 'mimes:jpg,png,jpeg,svg'],
@@ -540,7 +578,13 @@ class AdminController extends Controller
         $hotel['location'] = $location->location;
 
         $data->update($hotel);
+        DB::commit();
         return redirect()->route('admin.viewHotels')->with('success', 'Hotel Updated Successfully');
+    }
+    catch(\Exception $e){
+            DB::rollBack();
+            return back()->with('error',$e->getMessage());
+        }
     }
 
     public function trashedHotels()
@@ -550,14 +594,30 @@ class AdminController extends Controller
     }
     public function restoreTrashed($id)
     {
-        Hotel::onlyTrashed()->findOrFail($id)->restore();
-        return redirect()->route('admin.trashedHotels')->with('success', 'Restored Successfully');
+        try{
+            DB::beginTransaction();
+            Hotel::onlyTrashed()->findOrFail($id)->restore();
+            DB::commit();
+            return redirect()->route('admin.trashedHotels')->with('success', 'Restored Successfully');
+        }
+        catch(\Exception $e){
+            DB::rollBack();
+            return back()->with('error',$e->getMessage());
+        }
     }
     public function permanentHotelDelete($id)
     {
-        $data = Hotel::onlyTrashed()->findOrFail($id);
-        unlink(public_path('storage/' . $data->image));
-        $data->forceDelete();
-        return redirect()->route('admin.trashedHotels')->with('success', 'Permanently Deleted');
+        try{
+            DB::beginTransaction();
+            $data = Hotel::onlyTrashed()->findOrFail($id);
+            unlink(public_path('storage/' . $data->image));
+            $data->forceDelete();
+            DB::commit();
+            return redirect()->route('admin.trashedHotels')->with('success', 'Permanently Deleted');
+        }
+        catch(\Exception $e){
+            DB::rollBack();
+            return back()->with('error',$e->getMessage());
+        }
     }
 }
